@@ -1,0 +1,25 @@
+<div  id="<%= dom_id listing %>" class="rounded-2xl p-7 border border-gray-200 flex flex-col transition-all duration-200 group hover:border-green-900 hover:-translate-y-1">
+  <div class="relative"> <a href="single-product.html">
+      <%= image_tag(listing.photos.last) %>
+    </a>
+    <div class="flex items-center border border-gray-200 overflow-hidden w-fit bg-white max-h-[48px] rounded-[7px] absolute opacity-0 invisible transition-all duration-200 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 group-hover:visible"><a class="grid place-items-center border-r border-gray-200 hover:bg-gray-100 w-[48px] h-[48px]" href="#"> <img src="./assets/images/icons/icon-heart.svg" alt="heart icon"></a><a class="grid place-items-center border-r border-gray-200 hover:bg-gray-200 w-[48px] h-[48px]" href="#"> <img src="./assets/images/icons/icon-shuffle.svg" alt="shuffle icon"></a><a class="grid place-items-center hover:bg-gray-200 w-[48px] h-[48px]" href="#"> <img src="./assets/images/icons/icon-eye.svg" alt="eye icon"></a></div>
+  </div>
+  <a class="flex flex-col justify-between flex-1" href="<%= listing_path(listing) %>">
+    <div>
+      <p class="text-xs text-gray-500 font-bold mb-[7px]"><%= listing.category %></p>
+      <p class="text-lead font-bold mb-[11px]"><%= listing.title %></p>
+      <div class="flex items-center gap-[10px] mb-9">
+        <p class="text-tiny font-semibold text-gray-400">(86 rates)</p>
+      </div>
+    </div>
+    <div class="flex items-center justify-between">
+      <div class="flex items-baseline gap-2">
+        <h4 class="font-bold font-chivo text-[14px] xl:text-heading-5 text-green-900"><%= listing.price_per_day%> THB / Day
+        </h4>
+        <span class="text-gray-400 line-through text-tiny lg:text-md"><%= listing.price_per_day.to_f + (listing.price_per_day.to_f * 0.1) %></span>
+      </div>
+      <button class="flex items-center transition-colors duration-200 py-[5px] px-4 rounded-[8px] font-chivo font-semibold text-md md:text-lg text-white bg-green-100 text-green-900 w-fit">Rent
+      </button>
+    </div>
+  </a>
+</div>

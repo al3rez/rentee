@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  category: one
+  postcode: MyString
+  price_per_day: MyString
+  price_per_month: MyString
+  price_per_week: MyString
+  item_value: MyString
+  min_rental_days: 1
+
+two:
+  title: MyString
+  description: MyText
+  category: two
+  postcode: MyString
+  price_per_day: MyString
+  price_per_month: MyString
+  price_per_week: MyString
+  item_value: MyString
+  min_rental_days: 1
