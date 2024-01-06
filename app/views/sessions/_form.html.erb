@@ -1,3 +1,5 @@
+
+
   <%= form_with(url: login_path, method: :post, class: "flex w-full flex-col px-4") do |f| %>
   <div class="flex items-stretch gap-1.5 self-start">
     <div class="flex justify-center text-sunshine text-3xl whitespace-nowrap bg-black font-bold aspect-square items-center h-12 px-4 rounded-lg">R</div>
@@ -19,4 +21,7 @@
     <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb42c6e1ee5b5d58fc47083a383c78eec4aa5d867661fe23311616626350c002?" class="aspect-square object-contain object-center w-10 overflow-hidden self-stretch shrink-0 max-w-full" />
   </div>
   <%= f.submit "Sign in", class: "flex text-black text-base font-bold leading-6 whitespace-nowrap justify-center items-center bg-sunshine self-stretch mt-8 px-16 py-4 rounded-[130px] cursor-pointer" %>
+  <% if flash.alert.present? %>
+      <div><%= flash.alert %></div>
+  <% end %>
 <% end %>

@@ -6,14 +6,23 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= turbo_refreshes_with method: :morph, scroll: :preserve  %>
     <%= content_for :head %>
   </head>
-
-  <body>
-    <%= yield %>
+  <body class="bg-zinc-100 ">
+    <div class="flex w-full flex-col items-stretch mx-auto pt-4">
+      <%= yield %>
+      <div class="flex flex-col w-full bg-black shadow-sm justify-center items-stretch fixed bottom-0 md:top-0 md:bottom-auto px-2 py-2.5">
+        <div class="flex justify-between gap-3.5">
+          <img loading="lazy" srcset="<%= image_url('home.svg') %>" class="aspect-[1] object-contain object-center w-16 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+          <img loading="lazy" srcset="<%= image_url('cart.svg') %>" class="object-contain object-center w-16 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+          <img loading="lazy" srcset="<%= image_url('list.svg') %>" class="object-contain object-center w-16 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+          <img loading="lazy" srcset="<%= image_url('save.svg') %>" class="object-contain object-center w-16 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+          <img loading="lazy" srcset="<%= image_url('profile.svg') %>" class="object-contain object-center w-16 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+        </div>
+      </div>
+    </div>
   </body>
 </html>
