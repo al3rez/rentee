@@ -1,0 +1,22 @@
+  <%= form_with(url: login_path, method: :post, class: "flex w-full flex-col px-4") do |f| %>
+  <div class="flex items-stretch gap-1.5 self-start">
+    <div class="flex justify-center text-sunshine text-3xl whitespace-nowrap bg-black font-bold aspect-square items-center h-12 px-4 rounded-lg">R</div>
+    <div class="justify-center text-black text-xl self-center grow whitespace-nowrap my-auto">entee.</div>
+  </div>
+  <div class="text-black text-4xl font-bold leading-10 whitespace-nowrap items-stretch self-stretch mt-5 pt-7">Login to you account</div>
+  <div class="flex align-middle gap-1.5 mt-1.5">
+    <div class="flex text-zinc-400 ">Don’t have an account?</div>
+    <div class="flex text-black font-bold">Register</div>
+  </div>
+  <div class="text-black text-base font-bold leading-5 self-stretch mt-8">Email</div>
+  <div class="items-center bg-white self-stretch flex justify-between gap-2.5 pl-5 pr-1 py-2 rounded-xl">
+    <%= f.email_field :email, placeholder: "John_smith@gmail.com", class: "text-zinc-400 text-sm leading-5 grow whitespace-nowrap my-auto border-none appearance-none focus:ring-0" %>
+    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/0f0b26dde0e7b92769789c3660542ece137d5850c5a927e78eb16cbd547fa12d?" class="aspect-square object-contain object-center w-10 overflow-hidden self-stretch shrink-0 max-w-full" />
+  </div>
+  <div class="text-black text-base font-bold leading-5 self-stretch mt-4">Password</div>
+  <div class="items-center bg-white self-stretch flex justify-between gap-2.5 pl-5 pr-1 py-2 rounded-xl">
+    <%= f.password_field :password, placeholder: "***********", class: "text-zinc-400 text-sm leading-5 grow whitespace-nowrap my-auto border-none appearance-none focus:ring-0" %>
+    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/eb42c6e1ee5b5d58fc47083a383c78eec4aa5d867661fe23311616626350c002?" class="aspect-square object-contain object-center w-10 overflow-hidden self-stretch shrink-0 max-w-full" />
+  </div>
+  <%= f.submit "Sign in", class: "flex text-black text-base font-bold leading-6 whitespace-nowrap justify-center items-center bg-sunshine self-stretch mt-8 px-16 py-4 rounded-[130px] cursor-pointer" %>
+<% end %>
