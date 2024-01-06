@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include Accessible
+
   def new; end
 
   def create
