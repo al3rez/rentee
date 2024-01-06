@@ -1,14 +1,32 @@
-<div class="px-[12px] md:px-[36px] xl:px-0 mt-[70px] lg:mt-[111px]">
-  <div class="flex items-center justify-between md:mb-[82px] mb-[40px]">
-    <h2 class="font-bold font-chivo text-[28px] leading-[32px] md:text-heading-2 w-[16ch]">Listings
-    </h2>
-    <div class="flex items-center gap-5">
-      <div class="place-items-center border border-gray-200 bg-gray-100 rounded-full cursor-pointer group transition-colors duration-200 w-[48px] xl:w-[64px] h-[48px] xl:h-[64px] hover:bg-gray-900 undefined-prev grid"><img class="group-hover:filter-white" src="icon-prev.svg" alt="control icon button"></div>
-      <div class="place-items-center border border-gray-200 bg-gray-100 rounded-full cursor-pointer group transition-colors duration-200 w-[48px] xl:w-[64px] h-[48px] xl:h-[64px] hover:bg-gray-900 undefined-next grid"><img class="group-hover:filter-white" src="icon-next.svg" alt="control icon button"></div>
+<div class="bg-zinc-100 flex max-w-[480px] w-full flex-col items-stretch mx-auto pt-8">
+  <div class="flex w-full flex-col items-stretch">
+    <div class="flex items-stretch justify-between gap-3.5">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/395d145a62852996f80a7ef70e6f41563449c1ce5bda5376d7c20e12962542b8?" class="aspect-square object-contain object-center w-10 overflow-hidden shrink-0 max-w-full">
+      <div class="justify-center text-black text-2xl font-bold leading-6 self-center grow shrink basis-auto my-auto">
+        Film &amp; Photography
+      </div>
     </div>
-  </div>
-  <div id="listings"  class="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-    <%= render @listings %>
-  </div>
+    <div class="text-zinc-400 text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white mt-6 pl-4 pr-11 py-5 rounded-xl">
+      Search product
+    </div>
+    <div class="items-stretch flex gap-1.5 mt-4">
+      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+        Camera Lenses
+      </div>
+      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+        Memory Card
+      </div>
+      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+        Camera Bag
+      </div>
+      <div class="justify-center items-center bg-white flex w-[15px] shrink-0 h-10 flex-col rounded-[60px]"></div>
+    </div>
 
+    <% @listings.in_groups_of(2) do |listings| %>
+      <div class="items-stretch flex gap-3.5 mt-4 pb-4 self-start">
+        <%= render :partial => "listing", :collection => listings %>
+      </div>
+    <% end %>
+
+  </div>
 </div>
