@@ -13,7 +13,13 @@
   </head>
   <body class="bg-zinc-100 ">
     <div class="flex w-full flex-col items-stretch mx-auto pt-4">
-      <%= yield %>
+      <div class="flex w-full flex-col px-4">
+        <div class="flex items-stretch gap-1.5 self-start">
+          <div class="flex justify-center text-sunshine text-3xl whitespace-nowrap bg-black font-bold aspect-square items-center h-12 px-4 rounded-lg">R</div>
+          <div class="justify-center text-black text-xl self-center grow whitespace-nowrap my-auto">entee.</div>
+        </div>
+        <%= yield %>
+      </div>
       <div class="flex flex-col w-full bg-black shadow-sm justify-center items-stretch fixed bottom-0 md:top-0 md:bottom-auto p-5">
         <div class="flex justify-between gap-3.5">
           <div class="flex flex-col justify-center items-center gap-1 text-white">
