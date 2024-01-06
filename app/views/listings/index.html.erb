@@ -22,11 +22,9 @@
       <div class="justify-center items-center bg-white flex w-[15px] shrink-0 h-10 flex-col rounded-[60px]"></div>
     </div>
 
-    <% @listings.in_groups_of(2) do |listings| %>
-      <div class="items-stretch flex gap-3.5 mt-4 pb-4 self-start">
-        <%= render :partial => "listing", :collection => listings %>
-      </div>
-    <% end %>
+    <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">
+      <%= render :partial => "listing", :collection => @listings %>
+    </div>
 
   </div>
 </div>
