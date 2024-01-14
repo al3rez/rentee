@@ -17,7 +17,7 @@
         <%= render partial: "layouts/header" unless request.path =~ /listing/ %>
         <%= yield %>
       </div>
-      <%= render partial: "layouts/navbar" %>
+      <%= render partial: "layouts/navbar" unless request.path =~ /listings\/new/ %>
     </div>
   </body>
 </html>

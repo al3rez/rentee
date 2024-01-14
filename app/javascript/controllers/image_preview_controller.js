@@ -17,8 +17,7 @@ export default class extends Controller {
   displayImage(src) {
     let img = document.createElement('img');
     img.src = src;
-    img.style.maxWidth = '200px';
-    img.style.maxHeight = '200px';
+    img.className = "flex items-center justify-center w-[200px]  bg-white border-[2px] border-gray-400 border-dashed outline-none rounded-xl";
     this.previewTarget.appendChild(img);
   }
 }

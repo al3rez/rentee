@@ -1,4 +1,4 @@
-<nav class="flex fixed flex-col w-full bg-black shadow-sm justify-center items-stretch bottom-0 md:top-0 md:bottom-auto px-4 py-3">
+<nav class="flex flex-col w-full bg-black shadow-sm justify-center items-stretch bottom-0 md:top-0 md:bottom-auto px-4 py-3">
   <div class="flex justify-between gap-3.5">
     <div class="flex flex-col justify-center items-center gap-1 text-white">
       <div class="flex">
@@ -21,7 +21,7 @@
         <img loading="lazy" srcset="<%= image_url('list.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
       </div>
       <div class="flex text-sm">
-        <span>List an item</span>
+        <%= link_to "List an item", new_listing_path  %>
       </div>
     </div>
     <div class="flex flex-col justify-center items-center gap-1 text-white">

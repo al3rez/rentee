@@ -1,3 +1,4 @@
+<%= turbo_stream_from @listings %>
 <div class="bg-zinc-100 flex max-w-[480px] w-full flex-col items-stretch mx-auto pt-8">
   <div class="flex w-full flex-col items-stretch">
     <div class="flex items-stretch justify-between gap-3.5">
@@ -11,26 +12,14 @@
       <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
     </div>
     <div class="items-stretch flex gap-1.5 mt-4 overflow-x-scroll no-scrollbar">
-      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
-        Camera Lenses
-      </div>
-      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
-        Memory Card
-      </div>
-      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
-        Camera Bag
-      </div>
-      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
-        Camera Bag
-      </div>
-      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
-        Camera Bag
-      </div>
+      <% Category.all.each do |category| %>
+        <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+          <%= category.name %>
+        </div>
+      <% end %>
     </div>
-
-      <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">
-        <%= render :partial => "listing", :collection => @listings %>
-      </div>
-
+    <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">
+      <%= render :partial => "listing", :collection => @listings %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,21 @@
+databases:
+  - name: rentee
+    databaseName: rentee
+    user: rentee
+    plan: free
+
+services:
+  - type: web
+    name: rentee
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "./bin/rails server"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rentee
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+      - key: WEB_CONCURRENCY
+        value: 2
