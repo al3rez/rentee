@@ -177,6 +177,8 @@ GEM
     nokogiri (1.15.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-linux)
+      racc (~> 1.4)
     parallel (1.24.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
@@ -323,7 +325,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.3.0.preview2
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.5.1
