@@ -6,10 +6,11 @@
         Film &amp; Photography
       </div>
     </div>
-    <div class="text-zinc-400 text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white mt-6 pl-4 pr-11 py-5 rounded-xl">
-      Search product
+    <div class="flex justify-between text-zinc-400 text-sm leading-5 whitespace-nowrap items-center bg-white mt-6 p-3 rounded-xl">
+      <input class="outline-none" placeholder="Search product" />
+      <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
     </div>
-    <div class="items-stretch flex gap-1.5 mt-4">
+    <div class="items-stretch flex gap-1.5 mt-4 overflow-x-scroll no-scrollbar">
       <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
         Camera Lenses
       </div>
@@ -19,12 +20,17 @@
       <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
         Camera Bag
       </div>
-      <div class="justify-center items-center bg-white flex w-[15px] shrink-0 h-10 flex-col rounded-[60px]"></div>
+      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+        Camera Bag
+      </div>
+      <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+        Camera Bag
+      </div>
     </div>
 
-    <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">
-      <%= render :partial => "listing", :collection => @listings %>
-    </div>
+      <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">
+        <%= render :partial => "listing", :collection => @listings %>
+      </div>
 
   </div>
 </div>

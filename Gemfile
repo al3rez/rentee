@@ -72,3 +72,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "reek", "~> 6.2"
+
+gem "rubocop", "~> 1.59"

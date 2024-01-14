@@ -14,7 +14,7 @@
   <body class="bg-zinc-100 ">
     <div class="flex w-full flex-col items-stretch mx-auto pt-4">
       <div class="flex w-full flex-col px-4">
-        <%= render partial: "layouts/header" %>
+        <%= render partial: "layouts/header" unless request.path =~ /listing/ %>
         <%= yield %>
       </div>
       <%= render partial: "layouts/navbar" %>
