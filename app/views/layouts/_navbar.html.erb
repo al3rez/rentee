@@ -1,44 +1,46 @@
-<nav class="flex fixed flex-col w-full bg-black shadow-sm justify-center items-stretch bottom-0 md:top-0 md:bottom-auto px-4 py-3">
-  <div class="flex justify-between gap-3.5">
-    <div class="flex flex-col justify-center items-center gap-1 text-white">
-      <div class="flex">
-        <img loading="lazy" srcset="<%= image_url('home.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+<div class="mb-32">
+  <nav class="flex fixed flex-col w-full bg-black justify-center items-stretch bottom-0 md:top-0 md:bottom-auto px-4 py-3 shadow-custom">
+    <div class="flex justify-between gap-3.5">
+      <div class="flex flex-col justify-center items-center gap-1 text-white">
+        <div class="flex">
+          <img loading="lazy" srcset="<%= image_url('home.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+        </div>
+        <div class="flex text-sm">
+          <span>Home</span>
+        </div>
       </div>
-      <div class="flex text-sm">
-        <span>Home</span>
+      <div class="flex flex-col justify-center items-center gap-1 text-white">
+        <div class="flex">
+          <img loading="lazy" srcset="<%= image_url('cart.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+        </div>
+        <div class="flex text-sm">
+          <span>Cart</span>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center gap-1 text-white">
+        <div class="flex">
+          <img loading="lazy" srcset="<%= image_url('list.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+        </div>
+        <div class="flex text-sm">
+          <%= link_to "List an item", new_listing_path  %>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center gap-1 text-white">
+        <div class="flex">
+          <img loading="lazy" srcset="<%= image_url('save.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+        </div>
+        <div class="flex text-sm">
+          <span>Saved</span>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center gap-1 text-white">
+        <div class="flex">
+          <img loading="lazy" srcset="<%= image_url('profile.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
+        </div>
+        <div class="flex text-sm">
+          <span>Profile</span>
+        </div>
       </div>
     </div>
-    <div class="flex flex-col justify-center items-center gap-1 text-white">
-      <div class="flex">
-        <img loading="lazy" srcset="<%= image_url('cart.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
-      </div>
-      <div class="flex text-sm">
-        <span>Cart</span>
-      </div>
-    </div>
-    <div class="flex flex-col justify-center items-center gap-1 text-white">
-      <div class="flex">
-        <img loading="lazy" srcset="<%= image_url('list.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
-      </div>
-      <div class="flex text-sm">
-        <%= link_to "List an item", new_listing_path  %>
-      </div>
-    </div>
-    <div class="flex flex-col justify-center items-center gap-1 text-white">
-      <div class="flex">
-        <img loading="lazy" srcset="<%= image_url('save.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
-      </div>
-      <div class="flex text-sm">
-        <span>Saved</span>
-      </div>
-    </div>
-    <div class="flex flex-col justify-center items-center gap-1 text-white">
-      <div class="flex">
-        <img loading="lazy" srcset="<%= image_url('profile.svg') %>" class="object-contain object-center w-8 justify-center items-center overflow-hidden shrink-0 max-w-full" />
-      </div>
-      <div class="flex text-sm">
-        <span>Profile</span>
-      </div>
-    </div>
-  </div>
-</nav>
+  </nav>
+</div>
