@@ -1,15 +1,25 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
-
-    <%= render @category %>
-
-    <%= link_to "Edit this category", edit_category_path(@category), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this category", category_path(@category), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+<%= turbo_stream_from @category.listings %>
+<div class="bg-zinc-100 flex max-w-[480px] w-full flex-col items-stretch mx-auto pt-8">
+  <div class="flex w-full flex-col items-stretch">
+    <div class="flex items-stretch justify-between gap-3.5">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/395d145a62852996f80a7ef70e6f41563449c1ce5bda5376d7c20e12962542b8?" class="aspect-square object-contain object-center w-10 overflow-hidden shrink-0 max-w-full">
+      <div class="justify-center text-black text-2xl font-bold leading-6 self-center grow shrink basis-auto my-auto">
+        <%= @category.name %>
+      </div>
     </div>
-    <%= link_to "Back to categories", categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="flex justify-between text-zinc-400 text-sm leading-5 whitespace-nowrap items-center bg-white mt-6 p-3 rounded-xl">
+      <input class="outline-none" placeholder="Search product" />
+      <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
+    </div>
+    <div class="items-stretch flex gap-1.5 mt-4 overflow-x-scroll no-scrollbar">
+      <% Category.all.each do |category| %>
+        <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+          <%= category.name %>
+        </div>
+      <% end %>
+    </div>
+    <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">
+      <%= render :partial => "listings/listing", :collection => @category.listings %>
+    </div>
   </div>
 </div>
