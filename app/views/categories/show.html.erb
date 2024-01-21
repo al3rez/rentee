@@ -2,20 +2,24 @@
 <div class="bg-zinc-100 flex max-w-[480px] w-full flex-col items-stretch mx-auto pt-8">
   <div class="flex w-full flex-col items-stretch">
     <div class="flex items-stretch justify-between gap-3.5">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/395d145a62852996f80a7ef70e6f41563449c1ce5bda5376d7c20e12962542b8?" class="aspect-square object-contain object-center w-10 overflow-hidden shrink-0 max-w-full">
+      <%= link_to dashboard_index_path, class: "aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full bg-white rounded-full flex justify-center items-center w-8 h-8" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M5.45914 10.1625L10.2175 5.405L10.2175 5.40499C10.3746 5.24785 10.4629 5.03474 10.4629 4.81252C10.4629 4.5903 10.3746 4.37718 10.2175 4.22004C10.0603 4.06291 9.84723 3.97463 9.62501 3.97463C9.40279 3.97463 9.18967 4.06291 9.03253 4.22004L2.84509 10.4075C2.84507 10.4075 2.84505 10.4075 2.84503 10.4075C2.76719 10.4853 2.70544 10.5777 2.66331 10.6793C2.62116 10.781 2.59947 10.89 2.59947 11C2.59947 11.1101 2.62116 11.2191 2.66331 11.3207C2.70544 11.4224 2.76719 11.5147 2.84503 11.5925C2.84505 11.5925 2.84507 11.5925 2.84509 11.5925L9.03253 17.78C9.11034 17.8578 9.20271 17.9195 9.30436 17.9616C9.40602 18.0037 9.51497 18.0254 9.62501 18.0254C9.73504 18.0254 9.844 18.0037 9.94565 17.9616C10.0473 17.9195 10.1397 17.8578 10.2175 17.78C10.2953 17.7022 10.357 17.6098 10.3991 17.5082C10.4412 17.4065 10.4629 17.2975 10.4629 17.1875C10.4629 17.0775 10.4412 16.9685 10.3991 16.8669C10.357 16.7652 10.2953 16.6728 10.2175 16.595L10.2175 16.595L5.45914 11.8375H18.5625C18.7846 11.8375 18.9976 11.7493 19.1547 11.5922C19.3118 11.4352 19.4 11.2221 19.4 11C19.4 10.7779 19.3118 10.5649 19.1547 10.4078C18.9976 10.2508 18.7846 10.1625 18.5625 10.1625H5.45914Z" fill="black" stroke="black" stroke-width="0.3"/>
+        </svg>
+      <% end %>
       <div class="justify-center text-black text-2xl font-bold leading-6 self-center grow shrink basis-auto my-auto">
         <%= @category.name %>
       </div>
     </div>
     <div class="flex justify-between text-zinc-400 text-sm leading-5 whitespace-nowrap items-center bg-white mt-6 p-3 rounded-xl">
-      <input class="outline-none" placeholder="Search product" />
+      <input class="outline-none text-black" placeholder="Search product" />
       <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
     </div>
     <div class="items-stretch flex gap-1.5 mt-4 overflow-x-scroll no-scrollbar">
       <% Category.all.each do |category| %>
-        <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
+        <%= link_to category_path(category), class: "text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]" do %>
           <%= category.name %>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <div class="items-stretch grid grid-cols-2 gap-3.5 mt-4 pb-4 self-start">

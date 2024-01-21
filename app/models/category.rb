@@ -1,7 +1,10 @@
 class Category < ApplicationRecord
-    has_many :listings
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 
-    def to_s
-        name
-    end
+  has_many :listings
+
+  def to_s
+    name
+  end
 end

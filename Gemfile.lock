@@ -134,6 +134,8 @@ GEM
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
     erubi (1.12.0)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     htmlbeautifier (1.4.2)
@@ -309,6 +311,7 @@ DEPENDENCIES
   capybara
   closure_tree
   debug
+  friendly_id (~> 5.5)
   htmlbeautifier
   importmap-rails
   pg (~> 1.1)

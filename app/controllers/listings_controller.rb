@@ -2,7 +2,10 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @listings = Listing.all
+    @category = Category.friendly.find(params[:category_slug])
+    @search_param = params[:q]
+    @listings = current_user.listings
+    @listings = @listings.where("title LIKE ?", "%" + @search_param + "%") if @search_param
   end
 
   def show
@@ -16,7 +19,7 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @listing = Listing.new(listing_params)
+    @listing = Listing.new(listing_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @listing.save

@@ -76,3 +76,5 @@ end
 gem "reek", "~> 6.2"
 
 gem "rubocop", "~> 1.59"
+
+gem "friendly_id", "~> 5.5"
