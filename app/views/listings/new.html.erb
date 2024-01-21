@@ -1,6 +1,6 @@
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl">New listing</h1>
-  <%= form_with(model: @listing, class: "contents") do |form| %>
+  <%= form_with(model: [@category, @listing], class: "contents") do |form| %>
     <% if @listing.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
         <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>

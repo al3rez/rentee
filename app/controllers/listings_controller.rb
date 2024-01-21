@@ -1,8 +1,8 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_category, except: [:new, :create]
 
   def index
-    @category = Category.friendly.find(params[:category_slug])
     @search_param = params[:q]
     @listings = current_user.listings
     @listings = @listings.where("title LIKE ?", "%" + @search_param + "%") if @search_param
@@ -23,7 +23,7 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
       if @listing.save
-        format.html { redirect_to listing_url(@listing), notice: "Listing was successfully created." }
+        format.html { redirect_to category_listings_url(category_slug: @listing.category.slug), notice: "Listing was successfully created." }
         format.json { render :show, status: :created, location: @listing }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -53,10 +53,22 @@ class ListingsController < ApplicationController
     end
   end
 
+  def search
+    @listings = @category.listings.where("title ILIKE ?", "%#{params[:query]}%")
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
+  end
+
   private
 
   def set_listing
     @listing = Listing.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.friendly.find(params[:category_slug])
   end
 
   def listing_params

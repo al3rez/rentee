@@ -1,22 +1,22 @@
 <% if listing.present? %>
-<div class="flex grow basis-[0%] flex-col items-start pb-5">
-  <div class="flex-col overflow-hidden relative flex aspect-[1.2720588235294117] w-[173px] pl-16 pt-1.5 pb-12 items-end">
-    <%= image_tag(listing.photos.last, class: "absolute rounded-lg h-full w-full object-cover object-center inset-0") %>
-    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/4e27758b3048875fdd661b77568473ea448d6fb265930492bfd3640e4beecf9e?" class="aspect-[0.97] object-contain object-center w-[31px] overflow-hidden max-w-full mb-12">
-  </div>
-  <div class="text-black text-base leading-4 self-stretch mt-2.5">
-    <%= listing.title %>
-  </div>
-  <div class="justify-between self-stretch flex w-full gap-5 mt-1 items-start">
-    <div class="text-zinc-400 text-lg font-bold leading-5">
-      <span class="text-black">฿<%=listing.price_per_day-%></span><span class="text-zinc-400">/day</span>
+  <div class="flex grow basis-[0%] flex-col items-start pb-5">
+    <div class="flex-col overflow-hidden relative flex aspect-[1.2720588235294117] w-[173px] pl-16 pt-1.5 pb-12 items-end">
+      <%= image_tag(listing.photos.last, class: "absolute rounded-lg h-full w-full object-cover object-center inset-0") %>
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/4e27758b3048875fdd661b77568473ea448d6fb265930492bfd3640e4beecf9e?" class="aspect-[0.97] object-contain object-center w-[31px] overflow-hidden max-w-full mb-12">
     </div>
-    <div class="bg-white self-stretch flex justify-between gap-0.5 px-1 py-1 rounded-md items-start">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/16cb00564292162b23464b786e513b1fc523bc5faefca5325328fdb7a13148ef?" class="aspect-square object-contain object-center w-3.5 overflow-hidden shrink-0 max-w-full">
-      <div class="text-zinc-400 text-sm leading-4 self-stretch grow whitespace-nowrap">
-        4.4
+    <div class="text-black text-base leading-4 self-stretch mt-2.5">
+      <%= listing.title %>
+    </div>
+    <div class="justify-between self-stretch flex w-full gap-5 mt-1 items-start">
+      <div class="text-zinc-400 text-lg font-bold leading-5">
+        <span class="text-black">฿<%=listing.price_per_day-%></span><span class="text-zinc-400">/day</span>
+      </div>
+      <div class="bg-white self-stretch flex justify-between gap-0.5 px-1 py-1 rounded-md items-start">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/16cb00564292162b23464b786e513b1fc523bc5faefca5325328fdb7a13148ef?" class="aspect-square object-contain object-center w-3.5 overflow-hidden shrink-0 max-w-full">
+        <div class="text-zinc-400 text-sm leading-4 self-stretch grow whitespace-nowrap">
+          4.4
+        </div>
       </div>
     </div>
   </div>
-</div>
 <% end %>

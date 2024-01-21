@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   get 'dashboard/index'
 
   resources :categories, param: :slug, path: '/', only: [] do
-    resources :listings, path: '/'
+    resources :listings, path: '/' do
+      get :search, on: :collection
+    end
   end
+
+  resources :listings, only: [:new, :create, :update]
 
   resources :users, only: [:create]
   resources :sessions, only: [:create]

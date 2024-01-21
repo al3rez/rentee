@@ -1,6 +1,6 @@
 class Listing < ApplicationRecord
-  belongs_to :category
-  belongs_to :user
+  belongs_to :category, touch: true
+  belongs_to :user, touch: true
 
   has_many_attached :photos
 
