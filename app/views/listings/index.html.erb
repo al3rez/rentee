@@ -12,7 +12,7 @@
       <%= image_submit_tag "search.svg", class:"bg-black p-2 rounded-xl" %>
     <% end %>
     <div class="items-stretch flex gap-1.5 mt-4 overflow-x-scroll">
-      <% Category.all.each do |category| %>
+      <% Category.all.order(:name).each do |category| %>
         <div class="text-black text-sm leading-5 whitespace-nowrap justify-center items-stretch bg-white grow px-4 py-2.5 rounded-[60px]">
           <%= link_to category.name, category_listings_path(category_slug: category.slug) %>
         </div>

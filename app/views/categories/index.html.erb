@@ -9,7 +9,7 @@
     </div>
     <div class="flex justify-between text-zinc-400 text-sm leading-5 whitespace-nowrap items-center bg-white mt-6 p-3 rounded-xl">
       <input class="outline-none" placeholder="Search product" />
-      <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
+      <%= image_tag(category.image), class: "bg-black p-2 rounded-xl" %>
     </div>
     <div class="items-stretch flex gap-1.5 mt-4 overflow-x-scroll no-scrollbar">
       <% Category.all.each do |category| %>

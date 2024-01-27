@@ -12,39 +12,43 @@
     <%= form.file_field :photos, multiple: true, data: { action: "change->image-preview#previewImages", image_preview_target: "input" }, class: "hidden" %>
   </div>
 </div>
-<div class="my-5">
-  <%= form.label :title %>
-  <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-10">
+  <%= form.label :title, class:"font-bold" %>
+  <%= form.text_field :title, placeholder: "Max 40 char", class: "block h-14 rounded-lg border-none outline-none px-3 py-2 mt-2 w-full h-14 placeholder:text-gray-400" %>
 </div>
-<div class="my-5">
-  <%= form.label :description %>
-  <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :description, class:"font-bold" %>
+  <%= form.text_area :description, placeholder: "Write description to showcase your item", rows: 4, class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 pt-5 pb-10 px-5" %>
 </div>
-<div class="my-5">
-  <%= form.label :category_id %>
-  <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { prompt: 'Select a Category' }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :category_id, class:"font-bold"  %>
+  <%= form.select :category_id, Category.all.collect { |c| [c.name, c.id] }, { prompt: 'Category' }, class: "block font-bold rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 h-14" %>
 </div>
-<div class="my-5">
-  <%= form.label :postcode %>
-  <%= form.text_field :postcode, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :postcode, class: "font-bold" %>
+  <%= form.text_field :postcode, placeholder: "Post code", class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 h-14" %>
 </div>
-<div class="my-5">
-  <%= form.label :price_per_day %>
-  <%= form.text_field :price_per_day, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :price_per_day, class: "font-bold" %>
+  <%= form.text_field :price_per_day, placeholder: "Price", class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 h-14" %>
 </div>
-<div class="my-5">
-  <%= form.label :price_per_month %>
-  <%= form.text_field :price_per_month, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :price_per_month, class: "font-bold" %>
+  <%= form.text_field :price_per_month, placeholder: "Price", class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full h-14 placeholder:text-gray-400" %>
 </div>
-<div class="my-5">
-  <%= form.label :price_per_week %>
-  <%= form.text_field :price_per_week, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :price_per_week, class: "font-bold" %>
+  <%= form.text_field :price_per_week, placeholder: "Price", class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 h-14" %>
 </div>
-<div class="my-5">
-  <%= form.label :item_value %>
-  <%= form.text_field :item_value, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :item_value, class: "font-bold" %>
+  <%= form.text_field :item_value, placeholder: "Price", class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 h-14" do %>
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="20" fill="black"/>
+    </svg>
+  <%  end %>
 </div>
-<div class="my-5">
-  <%= form.label :min_rental_days %>
-  <%= form.number_field :min_rental_days, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+<div class="my-5 pt-5">
+  <%= form.label :min_rental_days, class: "font-bold" %>
+  <%= form.number_field :min_rental_days, placeholder: "0", class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 h-14" %>
 </div>
