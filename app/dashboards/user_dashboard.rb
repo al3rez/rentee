@@ -11,6 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     email: Field::String,
     listings: Field::HasMany,
+    avatar: Field::ActiveStorage,
     name: Field::String,
     password_digest: Field::String,
     created_at: Field::DateTime,
@@ -26,6 +27,7 @@ class UserDashboard < Administrate::BaseDashboard
     id
     email
     listings
+    avatar
     name
   ].freeze
 
@@ -33,6 +35,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    avatar
     email
     listings
     name
@@ -48,6 +51,7 @@ class UserDashboard < Administrate::BaseDashboard
     email
     listings
     name
+    avatar
     password_digest
   ].freeze
 

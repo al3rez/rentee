@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     root to: 'categories#index'
   end
-  resources :users, only: [:create]
+  resources :users, only: %i[create show]
   resources :sessions, only: [:create]
 
   get 'up' => 'rails/health#show', as: :rails_health_check
