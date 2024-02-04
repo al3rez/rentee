@@ -1,16 +1,31 @@
-<div class="flex flex-col bg-sunshine w-full px-4 items-start rounded-b-xl">
+<div class="flex flex-col bg-sunshine w-full px-4 items-start rounded-b-xl" data-controller="profile">
   <div class="flex justify-between items-center w-full pb-20">
     <div class="flex">
       <h1 class="font-semibold text-2xl">My profile</h1>
     </div>
-    <div class="flex">
+    <div class="flex cursor-pointer" data-action="click->profile#toggleMenu">
       <%= render "icons/edit" %>
+    </div>
+    <div class="absolute right-0 top-0 hidden shadow-lg" data-profile-target="menu">
+      <div class="bg-white p-4 rounded-xl">
+        <ul>
+          <li>Edit account</li>
+          <li>Change password</li>
+          <%= link_to logout_url do %>
+            <li class="text-lipstick">Logout</li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 <div class="flex relative">
   <div class="absolute left-0 bottom-[-2rem] px-4">
-   <%= image_tag(current_user.avatar, class: "rounded-full border-4 border-black") %> 
+    <% if current_user.avatar.persisted? %>
+      <%= image_tag(current_user.avatar, class: "rounded-full border-4 border-black") %>
+    <% else %>
+      <%= image_tag("https://i.pravatar.cc/100", class: "rounded-full border-4 border-black") %>
+    <% end %>
   </div>
 </div>
 <div class="px-4 flex flex-col pt-10">
@@ -29,5 +44,5 @@
       <span class="text-md text-gray-400">(15 reviews)</span>
     </div>
   </div>
-    <span class="py-5 text-md">I am a fulltime Photographer and Filmaker based in New York. For week long rentals, I may be able to travel to deliver (depend on my availability at the time). I have a lot more kit I don't use so drop me a message if any of my items interest you.</span>
+  <span class="py-5 text-md">I am a fulltime Photographer and Filmaker based in New York. For week long rentals, I may be able to travel to deliver (depend on my availability at the time). I have a lot more kit I don't use so drop me a message if any of my items interest you.</span>
 </div>

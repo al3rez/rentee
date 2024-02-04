@@ -21,6 +21,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    reset_session
+    Current.user = nil
+    redirect_to login_url
+  end
+
+
   private
 
   def user_params

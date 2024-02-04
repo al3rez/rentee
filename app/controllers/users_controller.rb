@@ -21,7 +21,6 @@ class UsersController < ApplicationController
       redirect_to register_path
     end
   end
-
   private
 
   def user_params

@@ -17,7 +17,9 @@
         <%= render partial: "layouts/header" unless request.path =~ /listing/ || request.path =~ /users/ %>
         <%= yield %>
       </div>
-      <%= render partial: "layouts/navbar" unless request.path =~ /listings\/new/ %>
+      <% if current_user.present? %>
+        <%= render partial: "layouts/navbar" unless request.path =~ /listings\/new/ %>
+      <% end %>
     </div>
   </body>
 </html>

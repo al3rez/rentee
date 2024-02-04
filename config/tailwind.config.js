@@ -17,6 +17,7 @@ module.exports = {
       },
       colors: {
         sunshine: "#ffff00",
+        lipstick: "#FF5050",
       },
     },
   },
