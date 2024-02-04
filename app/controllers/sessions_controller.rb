@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if user.authenticate(params[:password])
       reset_session
       session[:current_user_id] = user.id
-      redirect_to category_listings_path, notice: 'Successfully logged in.'
+      redirect_to root_url, notice: 'Successfully logged in.'
     else
       flash[:alert] = 'Invalid email or password'
       redirect_to :new
