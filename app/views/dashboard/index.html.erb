@@ -1,29 +1,31 @@
-<div class="flex flex-col items-star mt-5 pt-5">
-  <span class="text-zinc-400 ">Welcome!</span>
-  <div class="text-black text-4xl font-bold leading-10 items-stretch self-stretch max-w-2/4">Rent products from people around your area!</div>
-</div>
-<div class="flex justify-between text-zinc-400 text-sm leading-5 whitespace-nowrap items-center bg-white mt-6 p-3 rounded-xl">
-  <input class="outline-none" placeholder="Search product" />
-  <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
-</div>
-<div class="grid grid-cols-2 gap-2 mt-4">
-  <% Category.all.order(:name).each do |category| %>
-    <div class="flex max-w-[176px] flex-col justify-center items-stretch overflow-x-hidden">
-      <span class="border bg-sunshine flex w-full flex-col items-stretch pl-4 pt-5 pb-px rounded-xl border-solid border-zinc-100">
-        <div class="text-black text-base font-bold leading-5">
-          <%= category.name %>
-        </div>
-        <div class="flex justify-between gap-2 items-end">
-          <%= link_to category_listings_url(category_slug: category.slug), class: "aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full mt-14 bg-white rounded-full h-8 w-8 flex items-center justify-center mb-4" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M2.75 11C2.75 11.1823 2.82243 11.3572 2.95136 11.4861C3.08029 11.6151 3.25516 11.6875 3.4375 11.6875H16.903L11.8886 16.7011C11.8247 16.765 11.774 16.8408 11.7395 16.9243C11.7049 17.0077 11.6871 17.0972 11.6871 17.1875C11.6871 17.2778 11.7049 17.3673 11.7395 17.4507C11.774 17.5342 11.8247 17.61 11.8886 17.6739C11.9525 17.7378 12.0283 17.7885 12.1118 17.823C12.1952 17.8576 12.2847 17.8754 12.375 17.8754C12.4653 17.8754 12.5548 17.8576 12.6382 17.823C12.7217 17.7885 12.7975 17.7378 12.8614 17.6739L19.0489 11.4864C19.1128 11.4226 19.1635 11.3467 19.1981 11.2633C19.2327 11.1798 19.2505 11.0903 19.2505 11C19.2505 10.9097 19.2327 10.8202 19.1981 10.7367C19.1635 10.6533 19.1128 10.5774 19.0489 10.5136L12.8614 4.32609C12.7324 4.19709 12.5574 4.12462 12.375 4.12462C12.1926 4.12462 12.0176 4.19709 11.8886 4.32609C11.7596 4.4551 11.6871 4.63006 11.6871 4.8125C11.6871 4.99494 11.7596 5.1699 11.8886 5.29891L16.903 10.3125H3.4375C3.25516 10.3125 3.08029 10.3849 2.95136 10.5139C2.82243 10.6428 2.75 10.8177 2.75 11Z" fill="black"/>
-            </svg>
-          <% end %>
-          <% if category.image.attached? %>
-            <%= image_tag(category.image, class:"aspect-[1.17] object-contain object-center overflow-hidden self-stretch shrink-0 max-w-full") %>
-          <% end %>
-        </div>
-      </span>
-    </div>
-  <% end %>
+<div class="px-4">
+  <div class="flex flex-col items-star mt-5 pt-5">
+    <span class="text-zinc-400 ">Welcome!</span>
+    <div class="text-black text-4xl font-bold leading-10 items-stretch self-stretch max-w-2/4">Rent products from people around your area!</div>
+  </div>
+  <div class="flex justify-between text-zinc-400 text-sm leading-5 whitespace-nowrap items-center bg-white mt-6 p-3 rounded-xl">
+    <input class="outline-none" placeholder="Search product" />
+    <img class="bg-black p-2 rounded-xl" src="<%= image_url("search.svg") %>" />
+  </div>
+  <div class="grid grid-cols-2 gap-2 mt-4">
+    <% Category.all.order(:name).each do |category| %>
+      <div class="flex max-w-[176px] flex-col justify-center items-stretch overflow-x-hidden">
+        <span class="border bg-sunshine flex w-full flex-col items-stretch pl-4 pt-5 pb-px rounded-xl border-solid border-zinc-100">
+          <div class="text-black text-base font-bold leading-5">
+            <%= category.name %>
+          </div>
+          <div class="flex justify-between gap-2 items-end">
+            <%= link_to category_listings_url(category_slug: category.slug), class: "aspect-square object-contain object-center overflow-hidden shrink-0 max-w-full mt-14 bg-white rounded-full h-8 w-8 flex items-center justify-center mb-4" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M2.75 11C2.75 11.1823 2.82243 11.3572 2.95136 11.4861C3.08029 11.6151 3.25516 11.6875 3.4375 11.6875H16.903L11.8886 16.7011C11.8247 16.765 11.774 16.8408 11.7395 16.9243C11.7049 17.0077 11.6871 17.0972 11.6871 17.1875C11.6871 17.2778 11.7049 17.3673 11.7395 17.4507C11.774 17.5342 11.8247 17.61 11.8886 17.6739C11.9525 17.7378 12.0283 17.7885 12.1118 17.823C12.1952 17.8576 12.2847 17.8754 12.375 17.8754C12.4653 17.8754 12.5548 17.8576 12.6382 17.823C12.7217 17.7885 12.7975 17.7378 12.8614 17.6739L19.0489 11.4864C19.1128 11.4226 19.1635 11.3467 19.1981 11.2633C19.2327 11.1798 19.2505 11.0903 19.2505 11C19.2505 10.9097 19.2327 10.8202 19.1981 10.7367C19.1635 10.6533 19.1128 10.5774 19.0489 10.5136L12.8614 4.32609C12.7324 4.19709 12.5574 4.12462 12.375 4.12462C12.1926 4.12462 12.0176 4.19709 11.8886 4.32609C11.7596 4.4551 11.6871 4.63006 11.6871 4.8125C11.6871 4.99494 11.7596 5.1699 11.8886 5.29891L16.903 10.3125H3.4375C3.25516 10.3125 3.08029 10.3849 2.95136 10.5139C2.82243 10.6428 2.75 10.8177 2.75 11Z" fill="black"/>
+              </svg>
+            <% end %>
+            <% if category.image.attached? %>
+              <%= image_tag(category.image, class:"aspect-[1.17] object-contain object-center overflow-hidden self-stretch shrink-0 max-w-full") %>
+            <% end %>
+          </div>
+        </span>
+      </div>
+    <% end %>
+  </div>
 </div>
