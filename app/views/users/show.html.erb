@@ -1,0 +1,33 @@
+<div class="flex flex-col bg-sunshine w-full px-4 items-start rounded-b-xl">
+  <div class="flex justify-between items-center w-full pb-20">
+    <div class="flex">
+      <h1 class="font-semibold text-2xl">My profile</h1>
+    </div>
+    <div class="flex">
+      <%= render "icons/edit" %>
+    </div>
+  </div>
+</div>
+<div class="flex relative">
+  <div class="absolute left-0 bottom-[-2rem] px-4">
+   <%= image_tag(current_user.avatar, class: "rounded-full border-4 border-black") %> 
+  </div>
+</div>
+<div class="px-4 flex flex-col pt-10">
+  <div class="flex justify-between">
+    <div class="flex flex-col">
+      <span class="text-xl font-semibold"><%= Current.user.name %></span>
+      <span class="text-md text-gray-400">Austin, Texas</span>
+    </div>
+    <div class="flex flex-col items-end">
+      <div class="bg-white flex gap-0.5 px-1 py-1 rounded-md">
+        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/16cb00564292162b23464b786e513b1fc523bc5faefca5325328fdb7a13148ef?" class="aspect-square object-contain object-center w-3.5 overflow-hidden shrink-0 max-w-full">
+        <div class="text-zinc-400 text-sm leading-4 self-stretch whitespace-nowrap">
+          4.4
+        </div>
+      </div>
+      <span class="text-md text-gray-400">(15 reviews)</span>
+    </div>
+  </div>
+    <span class="py-5 text-md">I am a fulltime Photographer and Filmaker based in New York. For week long rentals, I may be able to travel to deliver (depend on my availability at the time). I have a lot more kit I don't use so drop me a message if any of my items interest you.</span>
+</div>

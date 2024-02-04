@@ -1,22 +1,26 @@
 class UsersController < ApplicationController
   include Accessible
 
-  def new
-  end
+  def new; end
 
+  def show; end
 
   def create
-    user = User.new(password: user_params[:password], password_confirmation: user_params[:password])
+    user = User.new(
+      email: user_params[:email],
+      password: user_params[:password],
+      password_confirmation: user_params[:password]
+    )
+
     if user.save
       reset_session
       session[:current_user_id] = user.id
-      redirect_to listings_path, notice: "Account was successfully created."
+      redirect_to listings_path, notice: 'Account was successfully created.'
     else
       flash[:alert] = user.errors.humanize
       redirect_to register_path
     end
   end
-
 
   private
 

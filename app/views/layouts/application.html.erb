@@ -11,10 +11,10 @@
     <%= turbo_refreshes_with method: :morph, scroll: :preserve  %>
     <%= content_for :head %>
   </head>
-  <body class="bg-zinc-100 ">
-    <div class="flex w-full flex-col items-stretch mx-auto pt-4">
-      <div class="flex w-full flex-col px-4">
-        <%= render partial: "layouts/header" unless request.path =~ /listing/ %>
+  <body class="bg-zinc-100">
+    <div class="flex w-full flex-col items-stretch mx-auto">
+      <div class="flex w-full flex-col">
+        <%= render partial: "layouts/header" unless request.path =~ /listing/ || request.path =~ /users/ %>
         <%= yield %>
       </div>
       <%= render partial: "layouts/navbar" unless request.path =~ /listings\/new/ %>
