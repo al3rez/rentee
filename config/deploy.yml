@@ -23,7 +23,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 192.168.0.2
+    DB_HOST: 5.78.97.228
   secret:
     - RAILS_MASTER_KEY
     - MYSQL_ROOT_PASSWORD
@@ -50,7 +50,7 @@ accessories:
     port: 3306
     env:
       clear:
-        MYSQL_ROOT_HOST: '%'
+        MYSQL_ROOT_HOST: "%"
       secret:
         - MYSQL_ROOT_PASSWORD
     files:
