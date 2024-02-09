@@ -8,8 +8,8 @@ gem 'rails', '~> 7.1.2'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
-# Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+# Use mysql as the database for Active Record
+gem 'mysql2', '~> 0.5'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
@@ -56,9 +56,10 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console'
   gem 'htmlbeautifier'
-  gem "ruby-lsp"
+  gem 'kamal'
+  gem 'ruby-lsp'
+  gem 'web-console'
 end
 
 group :test do

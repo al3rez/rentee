@@ -13,12 +13,12 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  user: postgres
-  host: localhost
-  password: mysecretpassword 
+  adapter: mysql2
+  encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  socket: /tmp/mysql.sock
 
 development:
   <<: *default
@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  host: <%= ENV["DB_HOST"] %>
   database: rentee_production
-  username: rentee
-  password: <%= ENV["RENTEE_DATABASE_PASSWORD"] %>
+  username: root
+  password: <%= ENV["MYSQL_ROOT_PASSWORD"] %>
