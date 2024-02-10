@@ -6,7 +6,8 @@ image: al3rez/rentee-app
 
 # Deploy to these servers.
 servers:
-  - 5.78.101.120
+  - 65.108.148.75
+  - 37.27.1.249
 
 # Credentials for your image host.
 registry:
@@ -22,7 +23,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 5.78.101.120
+    DB_HOST: 65.108.148.75
   secret:
     - RAILS_MASTER_KEY
     - MYSQL_ROOT_PASSWORD
@@ -45,7 +46,7 @@ env:
 accessories:
   db:
     image: mysql:8.0
-    host: 5.78.101.120
+    host: 65.108.148.75
     port: 3306
     env:
       clear:

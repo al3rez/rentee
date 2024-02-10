@@ -1,0 +1,67 @@
+<div class="flex flex-col bg-white w-full px-4 items-start rounded-b-xl">
+  <div class="flex justify-between items-center w-full pb-20">
+    <div class="flex">
+      <h1 class="font-semibold text-2xl">Edit Account</h1>
+    </div>
+    <%= link_to user_path(current_user), class:"flex cursor-pointer" do %>
+      <%= render "icons/close" %>
+    <% end %>
+    <div class="absolute right-7 top-14 hidden shadow-lg rounded-xl">
+      <div class="bg-white p-4 rounded-xl">
+        <ul>
+          <%= link_to edit_user_path(current_user) do %>
+            <li class="cursor-pointer">Edit account</li>
+          <% end %>
+          <li class="cursor-pointer">Change password</li>
+          <%= link_to logout_url do %>
+            <li class="text-lipstick">Logout</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-controller="avatar-preview">
+  <div class="flex relative">
+    <div class="absolute left-0 bottom-[-2rem] px-4" data-avatar-preview-target="preview" >
+      <div class="absolute z-10 top-0 right-0">
+        <%= render "icons/trash" %>
+      </div>
+      <% if current_user.avatar.present? %>
+        <%= image_tag(current_user.avatar, class:"rounded-full border-4 border-white")%>
+      <% else %>
+        <img src="<%= image_url("img-preview.svg") %>" class="rounded-full border-4 border-white"/>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="px-4 pt-10">
+    <%= form_with(model: current_user, method: :patch, class: "flex flex-col gap-5") do |form| %>
+      <div class="flex flex-col w-2/4">
+        <%= form.label :avatar, "Upload a new image", class:"bg-black text-white text-center text-lg py-3 text-nowrap rounded-full" %>
+        <%= form.file_field :avatar, data: { action: "change->avatar-preview#previewImages", avatar_preview_target: "input" }, class:"hidden" %>
+      </div>
+
+      <div>
+        <%= form.label :name, class:"font-bold" %>
+        <%= form.text_field :name, placeholder: "John Doe", class: "block py-4 rounded-lg border-none outline-none px-3 py-2 mt-2 w-full py-4 placeholder:text-gray-400" %>
+      </div>
+
+      <div>
+        <%= form.label :location, class:"font-bold" %>
+        <%= form.text_field :location, placeholder: "Austin, Texas", class: "block py-4 rounded-lg border-none outline-none px-3 py-2 mt-2 w-full py-4 placeholder:text-gray-400" %>
+      </div>
+
+      <div>
+        <%= form.label :bio, class:"font-bold" %>
+        <%= form.text_area :bio, placeholder: "Write description to showcase your item", rows: 4, class: "px-5 block rounded-lg border-none outline-none px-3 py-2 mt-2 w-full placeholder:text-gray-400 pt-5 pb-10 px-5" %>
+      </div>
+
+      <div class="flex gap-1 py-4">
+        <%= link_to "Cancel", user_path(current_user), class: "bg-white border border-gray-200 w-full font-bold text-md px-2 py-3 rounded-full cursor-pointer text-center" %>
+        <%= form.submit "Save changes", class: "bg-sunshine w-full font-bold text-md px-2 py-3 rounded-full cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+</div>

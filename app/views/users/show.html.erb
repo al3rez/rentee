@@ -9,8 +9,10 @@
     <div class="absolute right-7 top-14 hidden shadow-lg rounded-xl" data-profile-target="menu">
       <div class="bg-white p-4 rounded-xl">
         <ul>
-          <li>Edit account</li>
-          <li>Change password</li>
+          <%= link_to edit_user_path(current_user) do %>
+            <li class="cursor-pointer">Edit account</li>
+          <% end %>
+          <li class="cursor-pointer">Change password</li>
           <%= link_to logout_url do %>
             <li class="text-lipstick">Logout</li>
           <% end %>
@@ -31,8 +33,8 @@
 <div class="px-4 flex flex-col pt-10">
   <div class="flex justify-between">
     <div class="flex flex-col">
-      <span class="text-xl font-semibold"><%= Current.user.name %></span>
-      <span class="text-md text-gray-400">Austin, Texas</span>
+      <span class="text-xl font-semibold"><%= current_user.name %></span>
+      <span class="text-md text-gray-400"><%= current_user.location %></span>
     </div>
     <div class="flex flex-col items-end">
       <div class="bg-white flex gap-0.5 px-1 py-1 rounded-md">
@@ -44,5 +46,5 @@
       <span class="text-md text-gray-400">(15 reviews)</span>
     </div>
   </div>
-  <span class="py-5 text-md">I am a fulltime Photographer and Filmaker based in New York. For week long rentals, I may be able to travel to deliver (depend on my availability at the time). I have a lot more kit I don't use so drop me a message if any of my items interest you.</span>
+  <span class="py-5 text-md"><%= current_user.bio %></span>
 </div>

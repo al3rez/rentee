@@ -5,6 +5,12 @@ class UsersController < ApplicationController
 
   def show; end
 
+  def edit; end
+
+  def update
+    current_user.update(update_user_params)
+  end
+
   def create
     user = User.new(
       email: user_params[:email],
@@ -21,9 +27,14 @@ class UsersController < ApplicationController
       redirect_to register_path
     end
   end
+
   private
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def update_user_params
+    params.require(:user).permit(:name, :bio, :location, :avatar)
   end
 end
