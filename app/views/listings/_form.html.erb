@@ -9,7 +9,7 @@
   </div>
   <div class="flex">
     <%= form.label :photos, "Upload image", class: "bg-black text-white cursor-pointer py-3 px-5 rounded-full font-bold" %>
-    <%= form.file_field :photos, multiple: true, data: { action: "change->image-preview#previewImages", image_preview_target: "input" } %>
+    <%= form.file_field :photos, multiple: true, data: { action: "change->image-preview#previewImages", image_preview_target: "input" }, class: "hidden" %>
   </div>
 </div>
 <div class="my-5 pt-10">
