@@ -28,7 +28,7 @@
         <% period_text = { 'day' => 'Daily', 'week' => '7 days +', 'month' => '31 days +' } %>
         <span class="text-gray-400 text-sm"><%= period_text[period] %></span>
         <span class="text-nowrap">
-          <span class="font-bold text-md"><%= @listing.send("price_per_#{period}") %></span>
+          <span class="font-bold text-md">฿<%= @listing.send("price_per_#{period}") %></span>
           <span class="text-gray-400 text-sm">/<%= period %></span>
         </span>
       </div>
