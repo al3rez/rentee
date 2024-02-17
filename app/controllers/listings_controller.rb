@@ -1,8 +1,9 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[show edit update destroy]
-  before_action :set_category, except: %i[new create]
+  before_action :set_category, except: %i[new create show]
 
   def index
+    @search_param = params[:q]
     @search_param = params[:q]
     @listings = current_user.listings
     @listings = @listings.where('title LIKE ?', '%' + @search_param + '%') if @search_param

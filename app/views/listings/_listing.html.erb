@@ -1,5 +1,6 @@
 <% if listing.present? %>
-  <div class="flex grow basis-[0%] flex-col items-start pb-5">
+  <%= link_to listing_path(listing) do %>
+  <div class="flex grow basis-[0%] flex-col items-start pb-5 cursor-pointer">
     <div class="flex-col overflow-hidden relative flex aspect-[1.2720588235294117] w-[173px] pl-16 pt-1.5 pb-12 items-end">
       <% if listing.photos.present? %>
         <%= image_tag(listing.photos.last, class: "absolute rounded-lg h-full w-full object-cover object-center inset-0") %>
@@ -21,4 +22,5 @@
       </div>
     </div>
   </div>
+<% end %>
 <% end %>

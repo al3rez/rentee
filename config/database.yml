@@ -18,7 +18,7 @@ default: &default
   host: 127.0.0.1
   port: 3306
   username: root
-  password: password
+  password: p@ssword
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:

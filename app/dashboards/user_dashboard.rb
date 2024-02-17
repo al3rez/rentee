@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class UserDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -13,9 +13,10 @@ class UserDashboard < Administrate::BaseDashboard
     listings: Field::HasMany,
     avatar: Field::ActiveStorage,
     name: Field::String,
+    bio: Field::String,
     password_digest: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,6 +39,7 @@ class UserDashboard < Administrate::BaseDashboard
     avatar
     email
     listings
+    bio
     name
     password_digest
     created_at
@@ -51,6 +53,7 @@ class UserDashboard < Administrate::BaseDashboard
     email
     listings
     name
+    bio
     avatar
     password_digest
   ].freeze

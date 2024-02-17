@@ -1,4 +1,4 @@
-module Authenticate
+module Authenticate # rubocop:disable Style/Documentation
   extend ActiveSupport::Concern
 
   included do
