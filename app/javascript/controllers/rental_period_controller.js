@@ -7,34 +7,74 @@ export default class extends Controller {
     this.selectedDates = [];
   }
 
-  clearHighlights() {
-    this.dateTargets.forEach((el) => {
-      el.classList.remove("bg-sunshine", "shadow-lg");
+  selectDate(event) {
+    const selectedDate = event.currentTarget.getAttribute("data-day");
+    this.updateSelectedDates(selectedDate);
+    this.updateDateStyles();
+    this.manageHighlighting();
+  }
+
+  updateSelectedDates(selectedDate) {
+    const index = this.selectedDates.indexOf(selectedDate);
+    if (index >= 0) {
+      this.selectedDates.splice(index, 1);
+    } else {
+      if (this.selectedDates.length == 2) {
+        this.selectedDates = [];
+      }
+      this.selectedDates.push(selectedDate);
+    }
+  }
+
+  updateDateStyles() {
+    this.dateTargets.forEach((dateElement) => {
+      const date = dateElement.getAttribute("data-day");
+      if (this.selectedDates.includes(date)) {
+        dateElement.classList.add("bg-sunshine", "shadow-lg");
+      } else {
+        dateElement.classList.remove("bg-sunshine", "shadow-lg");
+      }
     });
-    // Also clear any absolute highlighters
+  }
+
+  manageHighlighting() {
+    if (this.selectedDates.length == 2) {
+      this.highlightRange(this.selectedDates[0], this.selectedDates[1]);
+    } else {
+      this.clearHighlights();
+    }
+  }
+
+  clearHighlights() {
     document.querySelectorAll(".absolute-highlighter").forEach((el) => {
       el.remove();
     });
   }
 
-  selectDate(event) {
-    const date = event.currentTarget.getAttribute("data-day");
-    const dateElement = event.currentTarget;
-    if (this.selectedDates.includes(date)) {
-      const index = this.selectedDates.indexOf(date);
-      this.selectedDates.splice(index, 1);
-      dateElement.classList.remove("bg-sunshine", "shadow-lg");
-    } else {
-      if (this.selectedDates.length == 2) {
-        this.clearHighlights();
-        this.selectedDates = [];
-      }
-      this.selectedDates.push(date);
-      dateElement.classList.add("bg-sunshine", "shadow-lg");
-    }
+  highlightRange(start, end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    this.clearHighlights();
 
-    if (this.selectedDates.length == 2) {
-      this.highlightRange(this.selectedDates[0], this.selectedDates[1]);
+    let currentRow = null;
+    let firstDateElement = null;
+    let lastDateElement = null;
+
+    this.dateTargets.forEach((el) => {
+      const elDate = new Date(el.getAttribute("data-day"));
+      if (elDate >= startDate && elDate <= endDate) {
+        if (currentRow !== el.parentElement) {
+          if (currentRow) {
+            this.createHighlighter(firstDateElement, lastDateElement);
+          }
+          currentRow = el.parentElement;
+          firstDateElement = el;
+        }
+        lastDateElement = el;
+      }
+    });
+    if (currentRow) {
+      this.createHighlighter(firstDateElement, lastDateElement);
     }
   }
 
@@ -52,33 +92,5 @@ export default class extends Controller {
       "px";
     highlighter.style.height = firstElement.offsetHeight + "px";
     firstElement.parentElement.appendChild(highlighter);
-  }
-
-  highlightRange(start, end) {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    this.clearHighlights();
-
-    let currentRow = null;
-    let firstDateElement = null;
-    let lastDateElement = null;
-
-    document.querySelectorAll("[data-day]").forEach((el) => {
-      const elDate = new Date(el.getAttribute("data-day"));
-      if (elDate >= startDate && elDate <= endDate) {
-        el.classList.add("bg-sunshine", "shadow-lg");
-        if (currentRow !== el.parentElement) {
-          if (currentRow) {
-            this.createHighlighter(firstDateElement, lastDateElement);
-          }
-          currentRow = el.parentElement;
-          firstDateElement = el;
-        }
-        lastDateElement = el;
-      }
-    });
-    if (currentRow) {
-      this.createHighlighter(firstDateElement, lastDateElement);
-    }
   }
 }
