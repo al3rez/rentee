@@ -22,7 +22,7 @@
     <% (start_date..end_date).each_slice(7) do |week| %>
       <div class="grid grid-cols-7 gap-1 w-full mt-2">
         <% week.each do |day| %>
-          <% day_classes = ['h-8 w-8 flex items-center justify-center rounded-full mx-auto cursor-pointer shadow-lg']
+          <% day_classes = ['h-8 w-8 flex items-center justify-center rounded-full mx-auto cursor-pointer']
              day_classes << 'text-gray-400' unless day.month == Date.today.month
              day_classes << 'bg-sunshine' if @selected_dates&.include?(day) %>
           <div class="<%= day_classes.join(' ') %>" data-day="<%= day.to_s %>" onclick="selectDate('<%= day.to_s %>')">
@@ -73,30 +73,39 @@
     function highlightRange(start, end) {
       const startDate = new Date(start);
       const endDate = new Date(end);
-      let firstDateElement, lastDateElement;
+      clearHighlights();
+
+      let currentRow = null;
+      let firstDateElement = null;
+      let lastDateElement = null;
+
       document.querySelectorAll('[data-day]').forEach(el => {
-        const elDate = new Date(el.getAttribute('data-day'));
-        if (elDate >= startDate && elDate <= endDate) {
-          el.classList.add('bg-sunshine', 'shadow-lg');
-          if (!firstDateElement || elDate < new Date(firstDateElement.getAttribute('data-day'))) {
-            firstDateElement = el;
-          }
-          if (!lastDateElement || elDate > new Date(lastDateElement.getAttribute('data-day'))) {
-            lastDateElement = el;
-          }
-        } else {
-          el.classList.remove('bg-sunshine', 'shadow-lg');
+    const elDate = new Date(el.getAttribute('data-day'));
+    if (elDate >= startDate && elDate <= endDate) {
+      el.classList.add('bg-sunshine', 'shadow-lg');
+      if (currentRow !== el.parentElement) {
+        if (currentRow) {
+          createHighlighter(firstDateElement, lastDateElement);
         }
-      });
-      if (firstDateElement && lastDateElement) {
-        const highlighter = document.createElement('div');
-        highlighter.className = 'absolute-highlighter bg-sunshine opacity-50 rounded-full z-[-1]'; // Adjusted z-index to z-[-1] to force highlighter under the days
-        highlighter.style.position = 'absolute';
-        highlighter.style.top = firstDateElement.offsetTop + 'px';
-        highlighter.style.left = firstDateElement.offsetLeft + 'px';
-        highlighter.style.width = (lastDateElement.offsetLeft - firstDateElement.offsetLeft + lastDateElement.offsetWidth) + 'px';
-        highlighter.style.height = firstDateElement.offsetHeight + 'px';
-        firstDateElement.parentElement.appendChild(highlighter);
+        currentRow = el.parentElement;
+        firstDateElement = el;
       }
+      lastDateElement = el;
+    }
+      });
+      if (currentRow) {
+    createHighlighter(firstDateElement, lastDateElement);
+      }
+    }
+
+    function createHighlighter(firstElement, lastElement) {
+      const highlighter = document.createElement('div');
+      highlighter.className = 'absolute-highlighter bg-sunshine opacity-50 rounded-full z-[-1]';
+      highlighter.style.position = 'absolute';
+      highlighter.style.top = firstElement.offsetTop + 'px';
+      highlighter.style.left = firstElement.offsetLeft + 'px';
+      highlighter.style.width = (lastElement.offsetLeft - firstElement.offsetLeft + lastElement.offsetWidth) + 'px';
+      highlighter.style.height = firstElement.offsetHeight + 'px';
+      firstElement.parentElement.appendChild(highlighter);
     }
   </script>
