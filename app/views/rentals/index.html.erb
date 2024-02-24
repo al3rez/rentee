@@ -1,4 +1,4 @@
-<div class="mx-auto md:w-2/3 w-full px-4">
+<div data-controller="rental-period" class="mx-auto md:w-2/3 w-full px-4">
   <div class="flex justify-between items-center">
     <h1 class="font-semibold text-2xl">Rental period</h1>
     <a href="<%= root_url %>">
@@ -25,7 +25,7 @@
           <% day_classes = ['h-8 w-8 flex items-center justify-center rounded-full mx-auto cursor-pointer']
              day_classes << 'text-gray-400' unless day.month == Date.today.month
              day_classes << 'bg-sunshine' if @selected_dates&.include?(day) %>
-          <div class="<%= day_classes.join(' ') %>" data-day="<%= day.to_s %>" onclick="selectDate('<%= day.to_s %>')">
+          <div data-rental-period-target="date" data-action="click->rental-period#selectDate" class="<%= day_classes.join(' ') %>" data-day="<%= day.to_s %>">
             <%= day.day %>
           </div>
         <% end %>
@@ -38,74 +38,3 @@
       <%= button_to "Go to checkout", rentals_path(@listing), class: "bg-sunshine w-full font-bold text-md py-3 rounded-full cursor-pointer" %>
     </div>
   </div>
-  <script>
-    let selectedDates = [];
-
-    function selectDate(date) {
-      const dateElement = document.querySelector(`[data-day='${date}']`);
-      if (selectedDates.includes(date)) {
-        const index = selectedDates.indexOf(date);
-        selectedDates.splice(index, 1);
-        dateElement.classList.remove('bg-sunshine', 'shadow-lg');
-      } else {
-        if (selectedDates.length == 2) {
-          clearHighlights();
-          selectedDates = [];
-        }
-        selectedDates.push(date);
-        dateElement.classList.add('bg-sunshine', 'shadow-lg');
-      }
-
-      if (selectedDates.length == 2) {
-        highlightRange(selectedDates[0], selectedDates[1]);
-      }
-    }
-
-    function clearHighlights() {
-      document.querySelectorAll('.absolute-highlighter').forEach(el => {
-        el.remove();
-      });
-      document.querySelectorAll('[data-day]').forEach(el => {
-        el.classList.remove('bg-sunshine', 'shadow-lg');
-      });
-    }
-
-    function highlightRange(start, end) {
-      const startDate = new Date(start);
-      const endDate = new Date(end);
-      clearHighlights();
-
-      let currentRow = null;
-      let firstDateElement = null;
-      let lastDateElement = null;
-
-      document.querySelectorAll('[data-day]').forEach(el => {
-    const elDate = new Date(el.getAttribute('data-day'));
-    if (elDate >= startDate && elDate <= endDate) {
-      el.classList.add('bg-sunshine', 'shadow-lg');
-      if (currentRow !== el.parentElement) {
-        if (currentRow) {
-          createHighlighter(firstDateElement, lastDateElement);
-        }
-        currentRow = el.parentElement;
-        firstDateElement = el;
-      }
-      lastDateElement = el;
-    }
-      });
-      if (currentRow) {
-    createHighlighter(firstDateElement, lastDateElement);
-      }
-    }
-
-    function createHighlighter(firstElement, lastElement) {
-      const highlighter = document.createElement('div');
-      highlighter.className = 'absolute-highlighter bg-sunshine opacity-50 rounded-full z-[-1]';
-      highlighter.style.position = 'absolute';
-      highlighter.style.top = firstElement.offsetTop + 'px';
-      highlighter.style.left = firstElement.offsetLeft + 'px';
-      highlighter.style.width = (lastElement.offsetLeft - firstElement.offsetLeft + lastElement.offsetWidth) + 'px';
-      highlighter.style.height = firstElement.offsetHeight + 'px';
-      firstElement.parentElement.appendChild(highlighter);
-    }
-  </script>
