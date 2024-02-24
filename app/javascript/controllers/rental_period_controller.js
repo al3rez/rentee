@@ -1,5 +1,21 @@
 import { Controller } from "@hotwired/stimulus";
 
+/**
+ * This Stimulus controller manages the UI interactions for selecting a rental period on a calendar interface.
+ * It allows users to select a start and end date for their rental period, visually highlights the selected dates,
+ * and provides feedback by dynamically updating the styles of the dates based on the user's selection.
+ *
+ * Key functionalities include:
+ * - Handling date selection: Users can click on a date to select or deselect it. The controller supports selecting up to two dates,
+ *   treating the first click as the start date and the second click as the end date of the rental period.
+ * - Visual feedback: Selected dates are visually distinguished with specific styles (e.g., background color, shadow).
+ *   If two dates are selected, the range between them is also highlighted to visually represent the rental period.
+ * - Dynamic UI updates: The controller listens for click events on date elements and updates the UI in response to user interactions.
+ *   This includes adding or removing styles from dates to indicate selection and highlighting the range between two selected dates.
+ * - Clearing selections: If more than two dates are selected, previous selections are cleared, allowing the user to choose a new rental period.
+ *
+ * The controller leverages Stimulus' targets feature to easily access and manipulate the DOM elements representing dates on the calendar.
+ */
 export default class extends Controller {
   static targets = ["date"];
 
