@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rentals/index'
+  get 'rentals/create'
   namespace :admin do
     resources :categories
     resources :listings
@@ -16,6 +18,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
 
+  resources :rentals
   resources :categories, param: :slug, path: '/', only: [] do
     resources :listings, path: '/' do
       get :search, on: :collection

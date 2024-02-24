@@ -16,11 +16,11 @@
   <body class="bg-zinc-100">
     <div class="flex w-full flex-col items-stretch mx-auto">
       <div class="flex w-full flex-col">
-        <%= render partial: "layouts/header" unless request.path =~ /listing/ || request.path =~ /users/ %>
+        <%= render partial: "layouts/header" unless request.path =~ /listing/ || request.path =~ /users/ || request.path =~ /rentals/ %>
         <%= yield %>
       </div>
       <% if current_user.present? %>
-        <%= render partial: "layouts/navbar" unless request.path =~ /listings\/new/ %>
+        <%= render partial: "layouts/navbar" unless request.path =~ /listings\/new/ || request.path =~ /listings/ || request.path =~ /rentals/ %>
       <% end %>
     </div>
   </body>

@@ -1,0 +1,69 @@
+<div class="mx-auto md:w-2/3 w-full px-4">
+  <div class="flex justify-between items-center">
+    <h1 class="font-semibold text-2xl">Rental period</h1>
+    <a href="<%= root_url %>">
+      <%= render "icons/close" %>
+    </a>
+  </div>
+  <div class="flex flex-col items-center my-8">
+    <div class="flex items-center justify-between w-full">
+      <h2 class="text-xl font-semibold flex-grow text-center"><%= Date.today.strftime("%B") %></h2>
+      <%= link_to rentals_index_path(month: @next_month), class: "p-2 self-end" do %>
+        <%= render "icons/right_arrow" %>
+      <% end %>
+    </div>
+    <div class="grid grid-cols-7 gap-1 w-full mt-4 text-gray-600">
+      <% ['S', 'M', 'T', 'W', 'T', 'F', 'S'].each do |day| %>
+        <div class="text-center w-full"><%= day %></div>
+      <% end %>
+    </div>
+    <% start_date = Date.today.beginning_of_month.beginning_of_week(:sunday) %>
+    <% end_date = Date.today.end_of_month.end_of_week(:sunday) %>
+    <% (start_date..end_date).each_slice(7) do |week| %>
+      <div class="grid grid-cols-7 gap-1 w-full mt-2">
+        <% week.each do |day| %>
+          <div class="<%= 'text-gray-400' unless day.month == Date.today.month %> h-8 w-8 flex items-center justify-center rounded-full mx-auto <%= 'bg-sunshine' if @selected_dates&.include?(day) %>" data-day="<%= day.to_s %>" onclick="selectDate('<%= day.to_s %>')">
+            <%= day.day %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="flex items-center bg-white p-2 rounded-lg text-nowrap text-sm self-start mt-4">
+      <%= render "icons/info" %><span class="ml-2">Rental period should be within 1-30 days long</span>
+    </div>
+    <div class="fixed bottom-0 left-0 w-full bg-white py-4 px-4 shadow-custom">
+      <%= button_to "Go to checkout", rentals_path(@listing), class: "bg-sunshine w-full font-bold text-md py-3 rounded-full cursor-pointer" %>
+    </div>
+  </div>
+  <script>
+    let selectedDates = [];
+
+    function selectDate(date) {
+      const dateElement = document.querySelector(`[data-day='${date}']`);
+      if (selectedDates.includes(date)) {
+        const index = selectedDates.indexOf(date);
+        selectedDates.splice(index, 1);
+        dateElement.classList.remove('bg-sunshine');
+      } else {
+        selectedDates.push(date);
+        dateElement.classList.add('bg-sunshine');
+      }
+
+      if (selectedDates.length == 2) {
+        highlightRange(selectedDates[0], selectedDates[1]);
+      }
+    }
+
+    function highlightRange(start, end) {
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      document.querySelectorAll('[data-day]').forEach(el => {
+        const elDate = new Date(el.getAttribute('data-day'));
+        if (elDate >= startDate && elDate <= endDate) {
+          el.classList.add('bg-sunshine');
+        } else {
+          el.classList.remove('bg-sunshine');
+        }
+      });
+    }
+  </script>

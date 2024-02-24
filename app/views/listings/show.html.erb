@@ -1,69 +1,20 @@
-<div class="flex flex-col bg-white w-full px-4 items-start image bg-no-repeat bg-cover bg-center h-2/4" style="background-image: url('http://localhost:3000<%= url_for(@listing.photos.last) %>')">
-  <div class="flex justify-between items-center w-full pb-20">
-    <%= link_to user_path(current_user), class:"flex cursor-pointer" do %>
-      <%= render "icons/close" %>
-    <% end %>
-    <%= link_to user_path(current_user), class:"flex cursor-pointer" do %>
-      <%= render "icons/bookmark" %>
-    <% end %>
-  </div>
-</div>
-<div class="px-4 flex flex-col pt-10">
-  <div class="flex justify-between">
-    <div class="flex flex-col">
-      <span class="text-2xl font-semibold"><%= @listing.title %></span>
-    </div>
-    <div class="flex flex-col items-end">
-      <div class="bg-white flex gap-0.5 px-1 py-1 rounded-md">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/16cb00564292162b23464b786e513b1fc523bc5faefca5325328fdb7a13148ef?" class="aspect-square object-contain object-center w-3.5 overflow-hidden shrink-0 max-w-full">
-        <div class="text-zinc-400 text-sm leading-4 self-stretch whitespace-nowrap">
-          4.4
-        </div>
-      </div>
+<div class="mx-auto md:w-2/3 w-full">
+  <div class="flex flex-col bg-white w-full px-4 items-start image bg-no-repeat bg-cover bg-center h-2/4" style="background-image: url('http://localhost:3000<%= url_for(@listing.photos.last) %>')">
+    <div class="flex justify-between items-center w-full pb-20">
+      <%= link_to user_path(current_user), class:"flex cursor-pointer" do %>
+        <%= render "icons/close" %>
+      <% end %>
+      <%= link_to user_path(current_user), class:"flex cursor-pointer" do %>
+        <%= render "icons/bookmark" %>
+      <% end %>
     </div>
   </div>
-  <div class="flex pt-5 space-x-4">
-    <% ['day', 'week', 'month'].each do |period| %>
-      <div class="flex flex-col bg-white p-3 rounded-lg items-center">
-        <% period_text = { 'day' => 'Daily', 'week' => '7 days +', 'month' => '31 days +' } %>
-        <span class="text-gray-400 text-sm"><%= period_text[period] %></span>
-        <span class="text-nowrap">
-          <span class="font-bold text-md">฿<%= @listing.send("price_per_#{period}") %></span>
-          <span class="text-gray-400 text-sm">/<%= period %></span>
-        </span>
+  <div class="px-4 flex flex-col pt-10">
+    <div class="flex justify-between">
+      <div class="flex flex-col">
+        <span class="text-2xl font-semibold"><%= @listing.title %></span>
       </div>
-    <% end %>
-  </div>
-  <div class="flex flex-col pt-5">
-    <span class="text-lg font-semibold">Description</span>
-    <span class="text-sm"><%= @listing.description %></span>
-  </div>
-  <div class="flex flex-col pt-5">
-    <span class="text-lg font-semibold">Location</span>
-    <span class="text-gray-400 text-sm"><span id="province"></span>, Thailand</span>
-    <div id="mapid" class="w-full h-[177px] z-0"></div>
-  </div>
-  <script>
-    async function initMap() {
-      const response = await fetch('/thailand.json');
-      const data = await response.json();
-      const listingZip = '<%= @listing.postcode %>';
-      const location = data.find(item => item.zip === listingZip);
-      if (location) {
-        const map = L.map('mapid').setView([location.lat, location.lng], 13);
-        L.marker([location.lat, location.lng]).addTo(map);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        document.getElementById('province').innerText = location.province;
-      }
-    }
-    initMap();
-  </script>
-  <div class="flex flex-col pt-5">
-    <span class="text-lg font-semibold">Item by lender</span>
-    <div class="flex items-start justify-start pt-3">
-      <%= image_tag(@listing.user.avatar, class: "rounded-full w-[56px] h-[56px] object-cover") %>
-      <div class="flex flex-col items-start pl-2">
-        <span class="text-sm mb-1"><%= @listing.user.name %></span>
+      <div class="flex flex-col items-end">
         <div class="bg-white flex gap-0.5 px-1 py-1 rounded-md">
           <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/16cb00564292162b23464b786e513b1fc523bc5faefca5325328fdb7a13148ef?" class="aspect-square object-contain object-center w-3.5 overflow-hidden shrink-0 max-w-full">
           <div class="text-zinc-400 text-sm leading-4 self-stretch whitespace-nowrap">
@@ -72,6 +23,60 @@
         </div>
       </div>
     </div>
-    <span class="text-sm pt-2"><%= @listing.user.bio %></span>
+    <div class="flex pt-5 space-x-4">
+      <% ['day', 'week', 'month'].each do |period| %>
+        <div class="flex flex-col bg-white p-3 rounded-lg items-center">
+          <% period_text = { 'day' => 'Daily', 'week' => '7 days +', 'month' => '31 days +' } %>
+          <span class="text-gray-400 text-sm"><%= period_text[period] %></span>
+          <span class="text-nowrap">
+            <span class="font-bold text-md">฿<%= @listing.send("price_per_#{period}") %></span>
+            <span class="text-gray-400 text-sm">/<%= period %></span>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    <div class="flex flex-col pt-5">
+      <span class="text-lg font-semibold">Description</span>
+      <span class="text-sm"><%= @listing.description %></span>
+    </div>
+    <div class="flex flex-col pt-5">
+      <span class="text-lg font-semibold">Location</span>
+      <span class="text-gray-400 text-sm"><span id="province"></span>, Thailand</span>
+      <div id="mapid" class="w-full h-[177px] z-0"></div>
+    </div>
+    <script>
+      async function initMap() {
+        const response = await fetch('/thailand.json');
+        const data = await response.json();
+        const listingZip = '<%= @listing.postcode %>';
+        const location = data.find(item => item.zip === listingZip);
+        if (location) {
+          const map = L.map('mapid').setView([location.lat, location.lng], 13);
+          L.marker([location.lat, location.lng]).addTo(map);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+          document.getElementById('province').innerText = location.province;
+        }
+      }
+      initMap();
+    </script>
+    <div class="flex flex-col pt-5">
+      <span class="text-lg font-semibold">Item by lender</span>
+      <div class="flex items-start justify-start pt-3">
+        <%= image_tag(@listing.user.avatar, class: "rounded-full w-[56px] h-[56px] object-cover") %>
+        <div class="flex flex-col items-start pl-2">
+          <span class="text-sm mb-1"><%= @listing.user.name %></span>
+          <div class="bg-white flex gap-0.5 px-1 py-1 rounded-md">
+            <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/16cb00564292162b23464b786e513b1fc523bc5faefca5325328fdb7a13148ef?" class="aspect-square object-contain object-center w-3.5 overflow-hidden shrink-0 max-w-full">
+            <div class="text-zinc-400 text-sm leading-4 self-stretch whitespace-nowrap">
+              4.4
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="text-sm pt-2"><%= @listing.user.bio %></span>
+    </div>
+    <div class="flex items-center justify-center py-4 mt-32">
+      <%= button_to "Check price and availability", rentals_url(@listing), class: "bg-sunshine w-full font-bold text-md px-4 py-3 rounded-full cursor-pointer" %>
+    </div>
   </div>
 </div>
