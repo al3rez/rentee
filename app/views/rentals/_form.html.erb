@@ -5,8 +5,8 @@
 <% end %>
 <%= form_with model: (@rental || Rental.new), url: rentals_path, method: :post, local: true, class:  "fixed bottom-0 left-0 w-full bg-white py-4 px-4 shadow-custom flex justify-center items-center" do |form| %>
   <%= form.hidden_field :listing_id, value: (@rental.present? ? @rental.listing_id : @listing.id) %>
-  <%= form.hidden_field :start_date, id: "start_date", value: "" %>
-  <%= form.hidden_field :end_date, id: "end_date", value: "" %>
+  <%= form.hidden_field :start_date, id: "start_date", data: { rental_period_target: "start" }, value: "" %>
+  <%= form.hidden_field :end_date, id: "end_date", data: { rental_period_target: "end" }, value: "" %>
   <div class="bg-sunshine w-full font-bold text-md px-4 py-3 rounded-full cursor-pointer flex justify-between items-center">
     <%= form.submit "Go to checkout", data: { action: "click->rental-period#submitForm" } %>
     <%= render "icons/cart" %>

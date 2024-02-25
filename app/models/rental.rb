@@ -20,12 +20,7 @@ class Rental < ApplicationRecord # rubocop:disable Style/Documentation
     self.status ||= :pending
   end
 
-  # Checks if the listing is available for the selected date range.  It queries
-  # for rentals that have the same listing_id, excluding the current rental's
-  # id, and where the start_date is before the current rental's end_date and the
-  # end_date is after the current rental's start_date.  If any overlapping
-  # rentals are found, it adds an error to the base object indicating the
-  # listing is not available.
+  # Validates listing availability against overlapping rentals.
   def check_listing_availability
     overlapping_rentals = Rental.where(listing_id:)
                                 .where.not(id:)

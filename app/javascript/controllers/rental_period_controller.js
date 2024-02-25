@@ -28,6 +28,7 @@ export default class extends Controller {
     this.updateSelectedDates(selectedDate);
     this.updateDateStyles();
     this.manageHighlighting();
+    this.updateDateTargets();
   }
 
   updateSelectedDates(selectedDate) {
@@ -67,6 +68,20 @@ export default class extends Controller {
     });
   }
 
+  updateDateTargets() {
+    if (this.selectedDates.length == 1) {
+      this.startTarget = this.dateTargets.find(
+        (el) => el.getAttribute("data-day") === this.selectedDates[0]
+      );
+    } else if (this.selectedDates.length == 2) {
+      this.startTarget = this.dateTargets.find(
+        (el) => el.getAttribute("data-day") === this.selectedDates[0]
+      );
+      this.endTarget = this.dateTargets.find(
+        (el) => el.getAttribute("data-day") === this.selectedDates[1]
+      );
+    }
+  }
   manageHighlighting() {
     if (this.selectedDates.length == 2) {
       this.highlightRange(this.selectedDates[0], this.selectedDates[1]);
@@ -123,26 +138,17 @@ export default class extends Controller {
     highlighter.style.height = firstElement.offsetHeight + "px";
     firstElement.parentElement.appendChild(highlighter);
   }
+
   submitForm(event) {
     event.preventDefault();
+    // TODO: Refactor this to use the date targets
     const startDateInput = document.getElementById("start_date");
     const endDateInput = document.getElementById("end_date");
-    let startDate = null;
-    let endDate = null;
 
-    this.dateTargets.forEach((el) => {
-      if (el.classList.contains("bg-sunshine")) {
-        const elDate = new Date(el.getAttribute("data-day"));
-        if (!startDate || elDate < startDate) {
-          startDate = elDate;
-        }
-        if (!endDate || elDate > endDate) {
-          endDate = elDate;
-        }
-      }
-    });
+    if (this.startTarget && this.endTarget) {
+      const startDate = new Date(this.startTarget.getAttribute("data-day"));
+      const endDate = new Date(this.endTarget.getAttribute("data-day"));
 
-    if (startDate && endDate) {
       startDateInput.value = startDate.toISOString().split("T")[0];
       endDateInput.value = endDate.toISOString().split("T")[0];
       this.element.querySelector("form").requestSubmit();
