@@ -1,4 +1,4 @@
-class RentalsController < ApplicationController
+class RentalsController < ApplicationController # rubocop:disable Style/Documentation
   before_action :set_listing, only: %i[index]
 
   def index; end
