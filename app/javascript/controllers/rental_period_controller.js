@@ -15,12 +15,16 @@ export default class extends Controller {
     this.refreshDateTargets();
   }
 
+  isTwoDatesChosen() {
+    return this.chosenDates.length == 2;
+  }
+
   refreshChosenDates(dayPicked) {
     const position = this.chosenDates.indexOf(dayPicked);
     if (position >= 0) {
       this.chosenDates.splice(position, 1);
     } else {
-      if (this.chosenDates.length == 2) {
+      if (this.isTwoDatesChosen()) {
         this.chosenDates.shift(); // Remove the oldest date
       }
       this.chosenDates.push(dayPicked);
@@ -30,44 +34,35 @@ export default class extends Controller {
   }
 
   refreshDateAppearance() {
+    const classes = [
+      "bg-sunshine",
+      "shadow-lg",
+      "border-2",
+      "border-white",
+      "font-bold",
+    ];
     this.dateTargets.forEach((dateElement) => {
       const date = dateElement.getAttribute("data-day");
-      if (this.chosenDates.includes(date)) {
-        dateElement.classList.add(
-          "bg-sunshine",
-          "shadow-lg",
-          "border-2",
-          "border-white",
-          "font-bold"
-        );
-      } else {
-        dateElement.classList.remove(
-          "bg-sunshine",
-          "shadow-lg",
-          "border-2",
-          "border-white",
-          "font-bold"
-        );
-      }
+      this.chosenDates.includes(date)
+        ? dateElement.classList.add(...classes)
+        : dateElement.classList.remove(...classes);
     });
   }
 
   refreshDateTargets() {
-    if (this.chosenDates.length == 1) {
-      this.startPoint = this.dateTargets.find(
-        (el) => el.getAttribute("data-day") === this.chosenDates[0]
-      );
-    } else if (this.chosenDates.length == 2) {
-      this.startPoint = this.dateTargets.find(
-        (el) => el.getAttribute("data-day") === this.chosenDates[0]
-      );
+    this.startPoint = this.dateTargets.find(
+      (el) => el.getAttribute("data-day") === this.chosenDates[0]
+    );
+
+    if (this.isTwoDatesChosen()) {
       this.endPoint = this.dateTargets.find(
         (el) => el.getAttribute("data-day") === this.chosenDates[1]
       );
     }
   }
+
   handleDateRangeHighlight() {
-    if (this.chosenDates.length == 2) {
+    if (this.isTwoDatesChosen()) {
       this.showDateRange(this.chosenDates[0], this.chosenDates[1]);
     } else {
       this.removeDateRangeHighlight();
