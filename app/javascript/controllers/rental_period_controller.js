@@ -1,54 +1,38 @@
 import { Controller } from "@hotwired/stimulus";
 
-/**
- * This Stimulus controller manages the UI interactions for selecting a rental period on a calendar interface.
- * It allows users to select a start and end date for their rental period, visually highlights the selected dates,
- * and provides feedback by dynamically updating the styles of the dates based on the user's selection.
- *
- * Key functionalities include:
- * - Handling date selection: Users can click on a date to select or deselect it. The controller supports selecting up to two dates,
- *   treating the first click as the start date and the second click as the end date of the rental period.
- * - Visual feedback: Selected dates are visually distinguished with specific styles (e.g., background color, shadow).
- *   If two dates are selected, the range between them is also highlighted to visually represent the rental period.
- * - Dynamic UI updates: The controller listens for click events on date elements and updates the UI in response to user interactions.
- *   This includes adding or removing styles from dates to indicate selection and highlighting the range between two selected dates.
- * - Clearing selections: If more than two dates are selected, previous selections are cleared, allowing the user to choose a new rental period.
- *
- * The controller leverages Stimulus' targets feature to easily access and manipulate the DOM elements representing dates on the calendar.
- */
 export default class extends Controller {
   static targets = ["date"];
 
   connect() {
-    this.selectedDates = [];
+    this.chosenDates = [];
   }
 
-  selectDate(event) {
-    const selectedDate = event.currentTarget.getAttribute("data-day");
-    this.updateSelectedDates(selectedDate);
-    this.updateDateStyles();
-    this.manageHighlighting();
-    this.updateDateTargets();
+  pickDate(event) {
+    const dayPicked = event.currentTarget.getAttribute("data-day");
+    this.refreshChosenDates(dayPicked);
+    this.refreshDateAppearance();
+    this.handleDateRangeHighlight();
+    this.refreshDateTargets();
   }
 
-  updateSelectedDates(selectedDate) {
-    const index = this.selectedDates.indexOf(selectedDate);
-    if (index >= 0) {
-      this.selectedDates.splice(index, 1);
+  refreshChosenDates(dayPicked) {
+    const position = this.chosenDates.indexOf(dayPicked);
+    if (position >= 0) {
+      this.chosenDates.splice(position, 1);
     } else {
-      if (this.selectedDates.length == 2) {
-        this.selectedDates.shift(); // Remove the first element instead of clearing all
+      if (this.chosenDates.length == 2) {
+        this.chosenDates.shift(); // Remove the oldest date
       }
-      this.selectedDates.push(selectedDate);
+      this.chosenDates.push(dayPicked);
     }
-    // Ensure the dates are in chronological order
-    this.selectedDates.sort((a, b) => new Date(a) - new Date(b));
+    // Sort dates to ensure they're in order
+    this.chosenDates.sort((a, b) => new Date(a) - new Date(b));
   }
 
-  updateDateStyles() {
+  refreshDateAppearance() {
     this.dateTargets.forEach((dateElement) => {
       const date = dateElement.getAttribute("data-day");
-      if (this.selectedDates.includes(date)) {
+      if (this.chosenDates.includes(date)) {
         dateElement.classList.add(
           "bg-sunshine",
           "shadow-lg",
@@ -68,38 +52,38 @@ export default class extends Controller {
     });
   }
 
-  updateDateTargets() {
-    if (this.selectedDates.length == 1) {
-      this.startTarget = this.dateTargets.find(
-        (el) => el.getAttribute("data-day") === this.selectedDates[0]
+  refreshDateTargets() {
+    if (this.chosenDates.length == 1) {
+      this.startPoint = this.dateTargets.find(
+        (el) => el.getAttribute("data-day") === this.chosenDates[0]
       );
-    } else if (this.selectedDates.length == 2) {
-      this.startTarget = this.dateTargets.find(
-        (el) => el.getAttribute("data-day") === this.selectedDates[0]
+    } else if (this.chosenDates.length == 2) {
+      this.startPoint = this.dateTargets.find(
+        (el) => el.getAttribute("data-day") === this.chosenDates[0]
       );
-      this.endTarget = this.dateTargets.find(
-        (el) => el.getAttribute("data-day") === this.selectedDates[1]
+      this.endPoint = this.dateTargets.find(
+        (el) => el.getAttribute("data-day") === this.chosenDates[1]
       );
     }
   }
-  manageHighlighting() {
-    if (this.selectedDates.length == 2) {
-      this.highlightRange(this.selectedDates[0], this.selectedDates[1]);
+  handleDateRangeHighlight() {
+    if (this.chosenDates.length == 2) {
+      this.showDateRange(this.chosenDates[0], this.chosenDates[1]);
     } else {
-      this.clearHighlights();
+      this.removeDateRangeHighlight();
     }
   }
 
-  clearHighlights() {
+  removeDateRangeHighlight() {
     document.querySelectorAll(".absolute-highlighter").forEach((el) => {
       el.remove();
     });
   }
 
-  highlightRange(start, end) {
+  showDateRange(start, end) {
     const startDate = new Date(start);
     const endDate = new Date(end);
-    this.clearHighlights();
+    this.removeDateRangeHighlight();
 
     let currentRow = null;
     let firstDateElement = null;
@@ -110,7 +94,7 @@ export default class extends Controller {
       if (elDate >= startDate && elDate <= endDate) {
         if (currentRow !== el.parentElement) {
           if (currentRow) {
-            this.createHighlighter(firstDateElement, lastDateElement);
+            this.spawnHighlighter(firstDateElement, lastDateElement);
           }
           currentRow = el.parentElement;
           firstDateElement = el;
@@ -119,11 +103,11 @@ export default class extends Controller {
       }
     });
     if (currentRow) {
-      this.createHighlighter(firstDateElement, lastDateElement);
+      this.spawnHighlighter(firstDateElement, lastDateElement);
     }
   }
 
-  createHighlighter(firstElement, lastElement) {
+  spawnHighlighter(firstElement, lastElement) {
     const highlighter = document.createElement("div");
     highlighter.className =
       "absolute-highlighter bg-sunshine opacity-50 rounded-full z-[-1]";
@@ -139,21 +123,20 @@ export default class extends Controller {
     firstElement.parentElement.appendChild(highlighter);
   }
 
-  submitForm(event) {
+  checkout(event) {
     event.preventDefault();
-    // TODO: Refactor this to use the date targets
-    const startDateInput = document.getElementById("start_date");
-    const endDateInput = document.getElementById("end_date");
+    const startInput = document.getElementById("start_date");
+    const endInput = document.getElementById("end_date");
 
-    if (this.startTarget && this.endTarget) {
-      const startDate = new Date(this.startTarget.getAttribute("data-day"));
-      const endDate = new Date(this.endTarget.getAttribute("data-day"));
+    if (this.startPoint && this.endPoint) {
+      const startDate = new Date(this.startPoint.getAttribute("data-day"));
+      const endDate = new Date(this.endPoint.getAttribute("data-day"));
 
-      startDateInput.value = startDate.toISOString().split("T")[0];
-      endDateInput.value = endDate.toISOString().split("T")[0];
+      startInput.value = startDate.toISOString().split("T")[0];
+      endInput.value = endDate.toISOString().split("T")[0];
       this.element.querySelector("form").requestSubmit();
     } else {
-      alert("Please select a rental period.");
+      alert("Please choose a rental period.");
     }
   }
 }

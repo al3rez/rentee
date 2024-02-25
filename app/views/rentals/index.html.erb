@@ -25,7 +25,7 @@
           <% day_classes = ['h-9 w-9 flex items-center justify-center rounded-full mx-auto cursor-pointer']
              day_classes << 'text-gray-400' unless day.month == Date.today.month
              day_classes << 'bg-sunshine' if @selected_dates&.include?(day) %>
-          <div data-rental-period-target="date" data-action="click->rental-period#selectDate" class="<%= day_classes.join(' ') %>" data-day="<%= day.to_s %>">
+          <div data-rental-period-target="date" data-action="click->rental-period#pickDate" class="<%= day_classes.join(' ') %>" data-day="<%= day.to_s %>">
             <%= day.day %>
           </div>
         <% end %>
