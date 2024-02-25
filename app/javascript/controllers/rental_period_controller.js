@@ -36,10 +36,12 @@ export default class extends Controller {
       this.selectedDates.splice(index, 1);
     } else {
       if (this.selectedDates.length == 2) {
-        this.selectedDates = [];
+        this.selectedDates.shift(); // Remove the first element instead of clearing all
       }
       this.selectedDates.push(selectedDate);
     }
+    // Ensure the dates are in chronological order
+    this.selectedDates.sort((a, b) => new Date(a) - new Date(b));
   }
 
   updateDateStyles() {
