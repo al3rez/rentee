@@ -6,8 +6,8 @@ class RentalsController < ApplicationController
   def new; end
 
   def create
-    @listing = Listing.find(rental_params[:listing_id])
-    @rental = Rental.new(rental_params.merge(user: current_user, owner: @listing.user))
+    @rental = Rental.new(rental_params.merge(user: current_user))
+
     if @rental.save
       redirect_to @rental
     else
