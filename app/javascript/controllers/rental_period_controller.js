@@ -48,9 +48,21 @@ export default class extends Controller {
     this.dateTargets.forEach((dateElement) => {
       const date = dateElement.getAttribute("data-day");
       if (this.selectedDates.includes(date)) {
-        dateElement.classList.add("bg-sunshine", "shadow-lg");
+        dateElement.classList.add(
+          "bg-sunshine",
+          "shadow-lg",
+          "border-2",
+          "border-white",
+          "font-bold"
+        );
       } else {
-        dateElement.classList.remove("bg-sunshine", "shadow-lg");
+        dateElement.classList.remove(
+          "bg-sunshine",
+          "shadow-lg",
+          "border-2",
+          "border-white",
+          "font-bold"
+        );
       }
     });
   }

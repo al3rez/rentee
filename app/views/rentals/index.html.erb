@@ -22,7 +22,7 @@
     <% (start_date..end_date).each_slice(7) do |week| %>
       <div class="grid grid-cols-7 gap-1 w-full mt-2">
         <% week.each do |day| %>
-          <% day_classes = ['h-8 w-8 flex items-center justify-center rounded-full mx-auto cursor-pointer']
+          <% day_classes = ['h-9 w-9 flex items-center justify-center rounded-full mx-auto cursor-pointer']
              day_classes << 'text-gray-400' unless day.month == Date.today.month
              day_classes << 'bg-sunshine' if @selected_dates&.include?(day) %>
           <div data-rental-period-target="date" data-action="click->rental-period#selectDate" class="<%= day_classes.join(' ') %>" data-day="<%= day.to_s %>">
