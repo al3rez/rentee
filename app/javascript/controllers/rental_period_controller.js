@@ -123,4 +123,31 @@ export default class extends Controller {
     highlighter.style.height = firstElement.offsetHeight + "px";
     firstElement.parentElement.appendChild(highlighter);
   }
+  submitForm(event) {
+    event.preventDefault();
+    const startDateInput = document.getElementById("start_date");
+    const endDateInput = document.getElementById("end_date");
+    let startDate = null;
+    let endDate = null;
+
+    this.dateTargets.forEach((el) => {
+      if (el.classList.contains("bg-sunshine")) {
+        const elDate = new Date(el.getAttribute("data-day"));
+        if (!startDate || elDate < startDate) {
+          startDate = elDate;
+        }
+        if (!endDate || elDate > endDate) {
+          endDate = elDate;
+        }
+      }
+    });
+
+    if (startDate && endDate) {
+      startDateInput.value = startDate.toISOString().split("T")[0];
+      endDateInput.value = endDate.toISOString().split("T")[0];
+      this.element.querySelector("form").requestSubmit();
+    } else {
+      alert("Please select a rental period.");
+    }
+  }
 }

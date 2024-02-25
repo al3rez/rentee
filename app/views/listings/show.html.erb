@@ -75,8 +75,11 @@
       </div>
       <span class="text-sm pt-2"><%= @listing.user.bio %></span>
     </div>
-    <div class="flex items-center justify-center py-4 mt-32">
-      <%= button_to "Check price and availability", rentals_url(@listing), class: "bg-sunshine w-full font-bold text-md px-4 py-3 rounded-full cursor-pointer" %>
+    <div class="fixed bottom-0 left-0 w-full bg-white py-4 px-4 shadow-custom flex justify-center items-center">
+      <%= link_to rentals_path(listing_id: @listing.id), class: "bg-sunshine w-full font-bold text-md px-4 py-3 rounded-full cursor-pointer flex justify-between items-center" do %>
+        Check price and availability
+        <%= render "icons/calendar" %>
+      <% end %>
     </div>
   </div>
 </div>

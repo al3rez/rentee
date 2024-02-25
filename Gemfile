@@ -60,6 +60,7 @@ group :development do
   gem 'kamal'
   gem 'ruby-lsp'
   gem 'web-console'
+  gem "byebug"
 end
 
 group :test do

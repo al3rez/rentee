@@ -34,7 +34,8 @@
     <div class="flex items-center bg-white p-2 rounded-lg text-nowrap text-sm self-start mt-4">
       <%= render "icons/info" %><span class="ml-2">Rental period should be within 1-30 days long</span>
     </div>
-    <div class="fixed bottom-0 left-0 w-full bg-white py-4 px-4 shadow-custom">
-      <%= button_to "Go to checkout", rentals_path(@listing), class: "bg-sunshine w-full font-bold text-md py-3 rounded-full cursor-pointer" %>
-    </div>
+    <%= turbo_stream_from "rental_form" %>
+    <%= turbo_frame_tag "rental_form" do %>
+      <%= render "form" %>
+    <% end %>
   </div>
